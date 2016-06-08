@@ -1,0 +1,14 @@
+/*GENERAL FONT*/
+body{
+	font-family: 'Exo 2', sans-serif;
+	font-weight: 900 !important;
+}	
+
+/*NAVBAR*/
+.navbar-custom{
+	background-color : #3B5998;
+}
+
+.navbar a{
+	color : white;
+}
