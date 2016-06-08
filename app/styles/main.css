@@ -44,6 +44,7 @@ body {
 .jumbotron {
 	/*text-align: center;*/
 	border-bottom: 1px solid #e5e5e5;
+	background-color : #e1e1ea;
 }
 .jumbotron .btn {
 	font-size: 21px;
@@ -82,12 +83,20 @@ body {
 	}
 }
 
-.jumbotron-background-2{
+.jumbotron-background-1{
 	background-image: url("../images/football-field.png");
 	background-size: cover;
 }
-.jumbotron-background-1{
+.jumbotron-background-2{
 	background-image: url("../images/tennis-court-2.png");
 	background-size: cover;
+}
+
+.jumbotron h2 {
+	color : white;	
+	font-weight: 700 !important;
+}
+.jumbotron h3 {
+	font-weight: 700 !important;
 }
 
