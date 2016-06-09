@@ -1,11 +1,75 @@
-<div class="jumbotron col-lg-12 col-md-12 col-sm-12 text-center jumbotron-background-{{selectedActivity}}">
-	<img src="images/bale.png"
+<div class="jumbotron col-lg-12 col-md-12 col-sm-12 text-center "
+ng-class="{1 : 'jumbotron-background-1', 2 : 'jumbotron-background-2'}[selectedActivity]">
+
+	<div class="stage" style="width: 400px; height: 400px;">
+		<div class="cubespinner">
+			<div class="face1">
+				<img src="images/bale.png"
+				id="bale"
+				class=" img-responsive pull-left"
+				alt="Responsive image"
+				ng-mouseover="selectedActivity=1"
+				ng-mouseleave="selectedActivity=null"
+				ng-hide="selectedActivity==2"/>
+			</div>
+			<div class="face2">
+				<img src="images/robben.png"
+				id="bale"
+				class=" img-responsive pull-left"
+				alt="Responsive image"
+				ng-mouseover="selectedActivity=1"
+				ng-mouseleave="selectedActivity=null"
+				ng-hide="selectedActivity==2"/>
+			</div>
+			<div class="face3">
+				<img src="images/zlatan.png"
+				id="bale"
+				class=" img-responsive pull-left"
+				alt="Responsive image"
+				ng-mouseover="selectedActivity=1"
+				ng-mouseleave="selectedActivity=null"
+				ng-hide="selectedActivity==2"/>
+			</div>
+			<div class="face4">
+				<img src="images/ronaldo.png"
+				id="bale"
+				class=" img-responsive pull-left"
+				alt="Responsive image"
+				ng-mouseover="selectedActivity=1"
+				ng-mouseleave="selectedActivity=null"
+				ng-hide="selectedActivity==2"/>
+			</div>
+			<div class="face5">
+				<img src="images/neymar.png"
+				id="bale"
+				class=" img-responsive pull-left"
+				alt="Responsive image"
+				ng-mouseover="selectedActivity=1"
+				ng-mouseleave="selectedActivity=null"
+				ng-hide="selectedActivity==2"/>
+			</div>
+			<div class="face6">
+				<img src="images/pogba.png"
+				id="bale"
+				class=" img-responsive pull-left"
+				alt="Responsive image"
+				ng-mouseover="selectedActivity=1"
+				ng-mouseleave="selectedActivity=null"
+				ng-hide="selectedActivity==2"/>
+			</div>
+		</div>
+	</div>
+
+	<!-- <img src="images/bale.png"
+	id="bale"
 	class="img-circle img-responsive pull-left"
 	alt="Responsive image"
 	ng-mouseover="selectedActivity=1"
 	ng-mouseleave="selectedActivity=null"
 	ng-hide="selectedActivity==2"/>
+
 	<img src="images/roger-federer.png"
+	id="federer"
 	class="img-circle img-responsive pull-right"
 	alt="Responsive image"
 	ng-mouseover="selectedActivity=2"
@@ -13,5 +77,5 @@
 	ng-hide="selectedActivity==1"/>
 	<h3 ng-show="!selectedActivity">CHOOSE ACTIVITY</h3>
 	<h2 class="text-right" ng-show="selectedActivity==1">FOOTBALL</h2>
-	<h2 class="text-left" ng-show="selectedActivity==2">TENNIS</h2>
+	<h2 class="text-left" ng-show="selectedActivity==2">TENNIS</h2> -->
 </div>
