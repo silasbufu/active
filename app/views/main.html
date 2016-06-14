@@ -1,10 +1,12 @@
 <div class="jumbotron col-lg-12 col-md-12 col-sm-12 text-center "
 ng-class="{1 : 'jumbotron-background-1', 2 : 'jumbotron-background-2'}[selectedActivity]">
+
 	<div class="row">
 		<div class="stage pull-left" style="width: 300px; height: 300px;"
-		ng-class="{'stage-opacity' : selectedActivity == 2}"
-		ng-mouseenter="selectedActivity=1"
-		ng-mouseleave="selectedActivity=null">
+		ng-class="{'stage-opacity' : selectedActivity == flags.ActivityType.TENNIS}"
+		ng-mouseenter="selectedActivity=flags.ActivityType.FOOTBALL"
+		ng-mouseleave="selectedActivity=null"
+		ng-click="selectActivity(selectedActivity)">
 			<div class="cubespinner ">
 				<div class="face1">
 					<img src="images/bale.png"
@@ -40,9 +42,10 @@ ng-class="{1 : 'jumbotron-background-1', 2 : 'jumbotron-background-2'}[selectedA
 		</div>
 
 		<div class="stage pull-right" style="width: 300px; height: 300px;"
-		ng-class="{'stage-opacity' : selectedActivity == 1}"
-		ng-mouseenter="selectedActivity=2"
-		ng-mouseleave="selectedActivity=null">
+		ng-class="{'stage-opacity' : selectedActivity == flags.ActivityType.FOOTBALL}"
+		ng-mouseenter="selectedActivity=flags.ActivityType.TENNIS"
+		ng-mouseleave="selectedActivity=null"
+		ng-click="selectActivity(selectedActivity)">
 			<div class="cubespinner ">
 				<div class="face1">
 					<img src="images/federer.png"
@@ -78,8 +81,8 @@ ng-class="{1 : 'jumbotron-background-1', 2 : 'jumbotron-background-2'}[selectedA
 		</div>
 
 		<h3 ng-show="!selectedActivity">CHOOSE ACTIVITY</h3>
-		<h2 class="pull-left" ng-show="selectedActivity==2">TENNIS</h2>
-		<h2 class="pull-right" ng-show="selectedActivity==1">FOOTBALL</h2>
+		<h2 class="pull-left" ng-show="selectedActivity==flags.ActivityType.TENNIS">TENNIS</h2>
+		<h2 class="pull-right" ng-show="selectedActivity==flags.ActivityType.FOOTBALL">FOOTBALL</h2>
 	</div>
 
 	<!-- <img src="images/bale.png"

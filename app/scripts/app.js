@@ -17,7 +17,19 @@ angular.module('activeApp', ['ngAnimate', 'ngCookies', 'ngResource', 'ngRoute', 
 		templateUrl : 'views/about.html',
 		controller : 'AboutCtrl',
 		controllerAs : 'about'
+	}).when('/football', {
+		templateUrl : 'views/football.html',
+		controller : 'FootballCtrl',
+		controllerAs : 'football'
+	}).when('/tennis', {
+		templateUrl : 'views/tennis.html',
+		controller : 'TennisCtrl',
+		controllerAs : 'tennis'
 	}).otherwise({
 		redirectTo : '/'
 	});
 });
+angular.module('activeApp').run(function runApp($rootScope, flags) {
+	$rootScope.flags = flags;
+});
+

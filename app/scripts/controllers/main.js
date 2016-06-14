@@ -7,7 +7,7 @@
  * # MainCtrl
  * Controller of the activeApp
  */
-angular.module('activeApp').controller('MainCtrl', function($scope, TestResource) {
+angular.module('activeApp').controller('MainCtrl', function($scope, $filter, $location, TestResource) {
 
 	function init() {
 		$scope.selectedActivity = null;
@@ -16,4 +16,9 @@ angular.module('activeApp').controller('MainCtrl', function($scope, TestResource
 	TestResource.get({}, function(data) {
 		console.log('test');
 	});
+	
+	$scope.selectActivity = function(activity){
+		var link = $filter('staticOptions')(activity, 'ActivityType');
+		$location.path(link);
+	};
 });

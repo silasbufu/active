@@ -1,0 +1,41 @@
+.panel {
+	background-color: white;
+	border: 1px solid #3B5998;
+	border-radius: 5px;
+}
+
+.panel-encase {
+	padding: 20px;
+}
+
+/*Football Members*/
+#footballMembersHeader {
+	text-align: center;
+	margin-bottom: 30px;
+}
+.football-members-list {
+	list-style: outside none none;
+	padding: 0 25px;
+}
+.football-members-list > li:hover {
+	background-color: #f8f8f8;
+}
+.football-member-avatar {
+	margin-right: 5px;
+}
+.football-member-role-text {
+	font-weight: 400;
+}
+.football-member {
+	display: flex;
+	margin-bottom: 15px;
+	cursor: pointer;
+}
+#member {
+	width: 80%;
+}
+a {
+	text-decoration: none !important;
+	color: black;
+}
+

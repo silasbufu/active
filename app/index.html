@@ -18,6 +18,7 @@
     <!-- build:css(.tmp) styles/main.css -->
     <link rel="stylesheet" href="styles/main.css">
     <link rel="stylesheet" href="styles/general.css" />
+    <link rel="stylesheet" href="styles/football.css" />
     <!-- endbuild -->
   </head>
   <body ng-app="activeApp">
@@ -91,12 +92,27 @@
 
         <!-- build:js({.tmp,app}) scripts/scripts.js -->
         <script src="scripts/app.js"></script>
+        
+        <!-- controller -->
         <script src="scripts/controllers/main.js"></script>
         <script src="scripts/controllers/about.js"></script>
+        <script src="scripts/controllers/football.js"></script>
+        <!-- endcontroller -->
         
+        <!-- resource -->
         <script src="scripts/resources/test-resource.js"></script>
+        <!-- endresource -->
         
+        <!-- service -->
         <script src="scripts/services/settings.js"></script>
+        <script src="scripts/services/flags.js"></script>
+        <!-- endservice -->
+        
+        <!-- filter -->
+        <script src="scripts/filters/status.js"></script>
+        <!-- endfilter -->
+        
+        <script src="scripts/controllers/tennis.js"></script>
         <!-- endbuild -->
 </body>
 </html>
