@@ -4,8 +4,9 @@
 			<div class="panel-encase">
 				<h3 id="footballMembersHeader">FOOTBALL MEMBERS ({{footballMembersCount}})</h3>
 				<ul class="football-members-list">
-					<li ng-repeat="(key, footballMember) in footballMembers">
-						<div class="football-member">
+					<li class="fraier"ng-repeat="(key, footballMember) in footballMembers">
+						<a class="football-member"></a>
+						<div class="football-member-item">
 							<img class="football-member-avatar" src="images/football_small.png">
 							<div id="member">
 								<a>{{footballMember.name}}</a>
@@ -13,28 +14,20 @@
 								<span class="football-member-role-text">{{footballMember.role}}</span>
 							</div>
 							<div class="attenting-status pull-right">
-								<a href="#" 
-								class="tip" 
-								rel="popover" 
-								data-original-title="Going">
-									<span ng-show="footballMember.status == flags.AttendingStatus.GOING" class="glyphicon glyphicon-ok"></span>
-								</a>
-								<a href="#" 
-								class="tip" 
-								rel="popover" 
-								data-original-title="Pending">
-									<span ng-show="footballMember.status == flags.AttendingStatus.PENDING" class="glyphicon glyphicon-minus"></span>
-								</a>
-								<a href="#" 
-								class="tip" 
-								rel="popover" 
-								data-original-title="Not Going">
-									<span ng-show="footballMember.status == flags.AttendingStatus.NOT_GOING" class="glyphicon glyphicon-remove"></span>
-								</a>
+								<span ng-show="footballMember.status == flags.AttendingStatus.GOING" class="glyphicon glyphicon-ok" title="Going"></span>
+								<span ng-show="footballMember.status == flags.AttendingStatus.PENDING" class="glyphicon glyphicon-minus" title="Pending"></span>
+								<span ng-show="footballMember.status == flags.AttendingStatus.NOT_GOING" class="glyphicon glyphicon-remove" title="Not Going"></span>
 							</div>
 						</div>
 					</li>
 				</ul>
+			</div>
+		</div>
+	</div>
+	<div class="col-lg-4 col-md-4 col-sm-4">
+		<div class="panel">
+			<div class="panel-encase">
+				
 			</div>
 		</div>
 	</div>

@@ -17,25 +17,45 @@
 	list-style: outside none none;
 	padding: 0 25px;
 }
-.football-members-list > li:hover {
-	background-color: #f8f8f8;
+.football-members-list li.fraier{
+	position : relative;
 }
+/*.football-members-list > li:hover {
+	background-color: #f8f8f8;
+}*/
 .football-member-avatar {
 	margin-right: 5px;
+	border-radius : 450px;
 }
 .football-member-role-text {
 	font-weight: 400;
 }
-.football-member {
+.football-member-item {
 	display: flex;
 	margin-bottom: 15px;
 	cursor: pointer;
+	position : relative;
 }
 #member {
 	width: 80%;
+}
+.attenting-status > span{
+    top: 11px;
 }
 a {
 	text-decoration: none !important;
 	color: black;
 }
+ul.football-members-list li.fraier:hover a.football-member {
+    background-color: #efefef;
+    border-right: 10px solid #3B5998;
+}
+
+ul.football-members-list li.fraier  a.football-member {
+    position: absolute;
+    left: -45px;
+    right: -45px;
+    top: 0;
+    bottom: 0;
+}   
 
