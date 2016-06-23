@@ -19,7 +19,7 @@ angular.module('activeApp').constant('flags', function() {
 		},
 		AttendingStatus:{
 			GOING : 1,
-			PENDING : 2,
+			MAYBE : 2,
 			NOT_GOING : 3
 		} 
 	};
