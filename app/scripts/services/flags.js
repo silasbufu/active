@@ -18,6 +18,7 @@ angular.module('activeApp').constant('flags', function() {
 			TENNIS : 2
 		},
 		AttendingStatus:{
+			PENDING : 0,
 			GOING : 1,
 			MAYBE : 2,
 			NOT_GOING : 3

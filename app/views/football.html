@@ -2,7 +2,7 @@
 	<div class="col-lg-4 col-md-4 col-sm-4">
 		<div class="panel">
 			<div class="panel-encase">
-				<h3 id="footballMembersHeader">FOOTBALL MEMBERS ({{footballMembersCount}})</h3>
+				<h3>FOOTBALL MEMBERS ({{footballMembersCount}})</h3>
 				<ul class="football-members-list">
 					<li class="fraier"ng-repeat="(key, footballMember) in footballMembers">
 						<a class="football-member"></a>
@@ -15,9 +15,10 @@
 								<span class="football-member-role-text">{{footballMember.role}}</span>
 							</div>
 							<div class="attenting-status pull-right">
-								<span ng-show="footballMember.status == flags.AttendingStatus.GOING" class="glyphicon glyphicon-ok" title="Going"></span>
-								<span ng-show="footballMember.status == flags.AttendingStatus.MAYBE" class="glyphicon glyphicon-minus" title="Maybe"></span>
-								<span ng-show="footballMember.status == flags.AttendingStatus.NOT_GOING" class="glyphicon glyphicon-remove" title="Not Going"></span>
+								<span ng-show="footballMember.status == flags.AttendingStatus.PENDING" class="glyphicon glyphicon-minus-sign" title="Pending"></span>
+								<span ng-show="footballMember.status == flags.AttendingStatus.GOING" class="glyphicon glyphicon-ok-sign" title="Going"></span>
+								<span ng-show="footballMember.status == flags.AttendingStatus.MAYBE" class="glyphicon glyphicon-question-sign" title="Maybe"></span>
+								<span ng-show="footballMember.status == flags.AttendingStatus.NOT_GOING" class="glyphicon glyphicon-remove-sign" title="Not Going"></span>
 							</div>
 						</div>
 					</li>
@@ -28,8 +29,8 @@
 	<div class="col-lg-4 col-md-4 col-sm-4">
 		<div class="panel">
 			<div class="panel-encase">
-				<h3 id="activityStatusHeader">ACTIVITY STATUS</h3>
-				<h4 id="activityStatusDateHeader">23-06-2016</h4>
+				<h3>NEXT EVENT</h3>
+				<h4>{{currentDate}}</h4>
 				<div class="btn-group btn-group-justified">
 					<div class="btn-group">
 						<button class="btn btn-success" type="button">
@@ -46,6 +47,38 @@
 							Not Going
 						</button>
 					</div>
+				</div>
+			</div>
+		</div>
+		<div class="panel">
+			<div class="panel-encase">
+				<h3>EVENT CALENDAR</h3>
+				<div id="calendar"></div>
+			</div>
+		</div>
+	</div>
+	<div class="col-lg-4 col-md-4 col-sm-4">
+		<div class="panel">
+			<div class="panel-encase">
+				<h3>LOCATION</h3>
+				<div>
+					<ng-map center="{{activityLocations.OffsideArena.coordinates}}">
+						<marker position="{{activityLocations.OffsideArena.coordinates}}" title="Offside Arena"></marker>
+					</ng-map>
+				</div>
+				<div id="footballLocationDetails">
+					<p>
+						Name : {{activityLocations.OffsideArena.name}}
+					</p>
+					<p>
+						Address : {{activityLocations.OffsideArena.address}}
+					</p>
+					<p>
+						Phone : {{activityLocations.OffsideArena.phone}}
+					</p>
+					<p>
+						E-mail : {{activityLocations.OffsideArena.email}}
+					</p>
 				</div>
 			</div>
 		</div>

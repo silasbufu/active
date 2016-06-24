@@ -8,7 +8,7 @@
  *
  * Main module of the application.
  */
-angular.module('activeApp', ['ngAnimate', 'ngCookies', 'ngResource', 'ngRoute', 'ngSanitize', 'ngTouch']).config(function($routeProvider) {
+angular.module('activeApp', ['ngAnimate', 'ngCookies', 'ngResource', 'ngRoute', 'ngSanitize', 'ngTouch', 'ngMap']).config(function($routeProvider) {
 	$routeProvider.when('/', {
 		templateUrl : 'views/main.html',
 		controller : 'MainCtrl',
@@ -29,7 +29,8 @@ angular.module('activeApp', ['ngAnimate', 'ngCookies', 'ngResource', 'ngRoute', 
 		redirectTo : '/'
 	});
 });
-angular.module('activeApp').run(function runApp($rootScope, flags) {
+angular.module('activeApp').run(function runApp($rootScope, flags, activityLocations) {
 	$rootScope.flags = flags;
+	$rootScope.activityLocations = activityLocations;
 });
 

@@ -1,3 +1,4 @@
+/*GENERAL*/
 .panel {
 	background-color: white;
 	border: 1px solid #3B5998;
@@ -6,6 +7,10 @@
 
 .panel-encase {
 	padding: 20px;
+}
+
+p {
+	font-weight : 600;
 }
 
 /*HEADER TAGS*/
@@ -17,6 +22,20 @@ h4 {
 	text-align: center;
 	margin-bottom: 30px;
 }
+
+h2 {
+	text-align: center;
+	margin-bottom: 30px;
+}
+
+/*BUTTONS*/
+button{
+	outline:none;
+}
+button:-moz-focus-inner{
+	border: 0;
+}
+
 
 /*Football Members*/
 .football-members-list {
@@ -65,11 +84,14 @@ ul.football-members-list li.fraier  a.football-member {
     bottom: 0;
 }   
 
-button{
-	outline:none;
-}
-button:-moz-focus-inner{
-	border: 0;
-}
 
 
+/*LOCATION*/
+#footballLocationDetails {
+	margin-top : 30px;
+}
+
+/*EVENT CALENDAR*/
+#calendar h2 {
+	font-size : 20px !important;
+}
