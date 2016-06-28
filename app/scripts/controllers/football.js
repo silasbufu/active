@@ -49,6 +49,6 @@ angular.module('activeApp').controller('FootballCtrl', function($scope, dateForm
         fixedWeekCount : false,
         contentHeight : "auto",
         firstDay : 1
-    })
+   });
 
 });

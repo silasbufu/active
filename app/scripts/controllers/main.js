@@ -13,7 +13,7 @@ angular.module('activeApp').controller('MainCtrl', function($scope, $filter, $lo
 		$scope.selectedActivity = null;
 	}
 
-	TestResource.get({}, function(data) {
+	TestResource.query({}, function(data) {
 		console.log('test');
 	});
 	

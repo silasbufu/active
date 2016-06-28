@@ -25,6 +25,10 @@ angular.module('activeApp', ['ngAnimate', 'ngCookies', 'ngResource', 'ngRoute', 
 		templateUrl : 'views/tennis.html',
 		controller : 'TennisCtrl',
 		controllerAs : 'tennis'
+	}).when('/user', {
+		templateUrl : 'views/user.html',
+		controller : 'UserCtrl',
+		controllerAs : 'user'
 	}).otherwise({
 		redirectTo : '/'
 	});
