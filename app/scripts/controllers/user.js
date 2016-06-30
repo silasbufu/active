@@ -7,10 +7,15 @@
  * # UserCtrl
  * Controller of the activeApp
  */
-angular.module('activeApp').controller('UserCtrl', function($scope, TestResource) {
+angular.module('activeApp').controller('UserCtrl', function($scope, settings, UserResource) {
 
-	$scope.entity = {};
+	$scope.save = function() {
+		var user = {
+			username : $scope.username,
+			password : $scope.password,
+		};
+		UserResource.save(user);
+	};
 	
-	$scope.save = TestResource.save($scope.entity);
-
+	
 });
