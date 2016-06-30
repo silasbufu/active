@@ -32,6 +32,7 @@ angular.module('activeApp').controller('LoginCtrl', function($rootScope, $scope,
 		if(fromRegistration){
 			$scope.login.username = $scope.user.username;
 			$scope.login.password = $scope.user.password;
+			$scope.fromRegistration = true;
 		}
 	};
 	//END INIT
@@ -39,6 +40,7 @@ angular.module('activeApp').controller('LoginCtrl', function($rootScope, $scope,
 	//LOGIN
 	$scope.submitLogin = function() {
 		$scope.loginPushed = true;
+		$scope.fromRegistration = false;
 		if ($scope.formObj.loginForm.$valid) {
 			UserResource.get({
 				username : $scope.login.username,

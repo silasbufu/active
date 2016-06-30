@@ -26,6 +26,9 @@
 					<p class="text-danger" ng-show="invalidCredentials">
 						Invalid username / password.
 					</p>
+					<p class="text-success" ng-show="fromRegistration">
+						Username was created successfully.
+					</p>
 					<div class="form-group">
 						<button type="button" class="btn form-control btn-primary" ng-click="submitLogin()">
 							Login
