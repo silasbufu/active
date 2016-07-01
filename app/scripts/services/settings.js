@@ -10,5 +10,6 @@
 angular.module('activeApp')
   .constant('settings', {
 		api:'192.168.2.124:8080/active-bck/',
-        protocol:'http://'
+        protocol:'http://',
+        chatUrl : 'http://192.168.2.118:3000/active' 
     });

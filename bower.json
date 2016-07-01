@@ -11,6 +11,7 @@
     "angular-route": "^1.4.0",
     "angular-sanitize": "^1.4.0",
     "angular-touch": "^1.4.0",
+    "ng-file-upload": "10.0.2",
     "ngmap" : "1.17.3",
     "fullcalendar":"2.8.0"
   },

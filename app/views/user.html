@@ -1,17 +1,125 @@
-<div class="col-lg-4 col-md-4 col-sm-4">
-	<form class="navbar-form" role="search">
+<div class="col-sm-4">
+	<form name="userForm" class="userForm" role="search">
 		<div class="panel">
 			<div class="panel-encase">
+				<h3>USER DETAILS</h3>
 				<div class="form-group">
-					<input type="text" class="form-control" ng-model="username">
+					<label>Username:<span class="text-danger">*</span></label>
+					<input type="text"
+					class="form-control"
+					ng-class="{'alert-danger' : (userForm.username.$error.required && savePushed) || validUsername==false}"
+					name="username"
+					ng-model="user.username"
+					ng-blur="checkExistingUsername(user.username)"
+					required
+					autocomplete="off"
+					maxlength="32">
+				</div>
+				<p class="text-success" ng-show="validUsername==true">
+					Username is available.
+				</p>
+				<p class="text-danger" ng-show="validUsername==false">
+					Username is not available.
+				</p>
+				<div class="form-group">
+					<label>Password:<span class="text-danger">*</span></label>
+					<input type="password"
+					class="form-control"
+					ng-class="{'alert-danger' : (userForm.password.$error.required && savePushed) || differentPasswords}"
+					name="password"
+					ng-model="user.password"
+					required
+					autocomplete="off"
+					maxlength="32">
 				</div>
 				<div class="form-group">
-					<input type="password" class="form-control" ng-model="password">
+					<label>Repeat Password:<span class="text-danger">*</span></label>
+					<input type="password"
+					class="form-control"
+					ng-class="{'alert-danger' : (userForm.repeatPassword.$error.required && savePushed) || differentPasswords}"
+					name="repeatPassword"
+					ng-model="repeatPassword"
+					required
+					autocomplete="off"
+					maxlength="32">
 				</div>
-				<button type="submit" class="btn btn-default" ng-click="save()">
-					Save
-				</button>
+				<p class="text-danger" ng-show="differentPasswords">
+					Passwords do not match.
+				</p>
+				<div class="form-group">
+					<label>Full Name:<span class="text-danger">*</span></label>
+					<input type="text"
+					class="form-control"
+					ng-class="{'alert-danger' : userForm.fullName.$error.required && savePushed}"
+					name="fullName"
+					ng-model="user.fullName"
+					required
+					autocomplete="off"
+					maxlength="64">
+				</div>
+				<div class="form-group">
+					<label>Role<span class="text-danger">*</span>:</label>
+					<input type="text"
+					class="form-control"
+					ng-class="{'alert-danger' : userForm.fullName.$error.required && savePushed}"
+					name="fullName"
+					ng-model="user.role"
+					required
+					autocomplete="off"
+					maxlength="64">
+				</div>
+				<div class="form-group">
+					<label>Email:</label>
+					<input type="text"
+					class="form-control"
+					name="email"
+					ng-model="user.email"
+					autocomplete="off"
+					maxlength="64">
+				</div>
+				<div class="form-group">
+					<label>Phone:</label>
+					<input type="text"
+					class="form-control"
+					name="phone"
+					ng-model="user.phone"
+					autocomplete="off"
+					maxlength="32">
+				</div>
+				<p class="text-success" ng-show="saveSuccessfull">
+					Changes have been saved successfully.
+				</p>
+				<div class="form-group">
+					<button type="button" class="btn form-control btn-success" ng-click="saveChanges()">
+						Save Changes
+					</button>
+				</div>
 			</div>
 		</div>
 	</form>
 </div>
+
+<div class="col-sm-4">
+	<div class="panel">
+		<div class="panel-encase">
+			<h3>AVATAR UPLOAD</h3>
+			<div class="panel avatar-upload-panel"
+			ngf-drop
+			ngf-select
+			ng-model="file"
+			class="drop-box"
+			ngf-drag-over-class="'dragover'"
+			ngf-multiple="false"
+			ngf-allow-dir="true">
+				<div class="drop-box">
+					<span ng-show="!file">Drop Image here or click for upload.</span>
+					<span ng-show="file">{{file.name}}.</span>
+				</div>
+				<div ngf-no-file-drop>
+					File Drag/Drop is not supported for this browser
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+

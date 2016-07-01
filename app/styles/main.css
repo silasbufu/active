@@ -117,37 +117,42 @@ from, to {
 66%      { -webkit-transform: rotateY(-270deg) rotateX(90deg);           }
 83%      { -webkit-transform: rotateX(90deg);                            }
 }
-
 @keyframes
 spincube {from,to {
 	-moz-transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
 	-ms-transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
-	transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+	/*transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);*/
+	-webkit-transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
 }
 16% {
 -moz-transform: rotateY(-90deg);
 -ms-transform: rotateY(-90deg);
-transform: rotateY(-90deg);
+/*transform: rotateY(-90deg);*/
+-webkit-transform: rotateY(-90deg);
 }
 33% {
 -moz-transform: rotateY(-90deg) rotateZ(90deg);
 -ms-transform: rotateY(-90deg) rotateZ(90deg);
-transform: rotateY(-90deg) rotateZ(90deg);
+/*transform: rotateY(-90deg) rotateZ(90deg);*/
+-webkit-transform: rotateY(-90deg) rotateZ(90deg);
 }
 50% {
 -moz-transform: rotateY(-180deg) rotateZ(90deg);
 -ms-transform: rotateY(-180deg) rotateZ(90deg);
-transform: rotateY(-180deg) rotateZ(90deg);
+/*transform: rotateY(-180deg) rotateZ(90deg);*/
+-webkit-transform: rotateY(-180deg) rotateZ(90deg); 
 }
 66% {
 -moz-transform: rotateY(-270deg) rotateX(90deg);
 -ms-transform: rotateY(-270deg) rotateX(90deg);
-transform: rotateY(-270deg) rotateX(90deg);
+/*transform: rotateY(-270deg) rotateX(90deg);*/
+-webkit-transform: rotateY(-270deg) rotateX(90deg); 
 }
 83% {
 -moz-transform: rotateX(90deg);
 -ms-transform: rotateX(90deg);
-transform: rotateX(90deg);
+/*transform: rotateX(90deg);*/
+-webkit-transform: rotateX(90deg);
 }
 }
 
@@ -160,6 +165,7 @@ transform: rotateX(90deg);
 	animation-timing-function: ease-in-out;
 	animation-iteration-count: infinite;
 	animation-duration: 12s;
+	-webkit-transform-style: preserve-3d;
 	-webkit-transform-style: preserve-3d;
 	-moz-transform-style: preserve-3d;
 	-ms-transform-style: preserve-3d;

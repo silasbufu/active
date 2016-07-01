@@ -21,6 +21,7 @@
 		<link rel="stylesheet" href="styles/general.css" />
 		<link rel="stylesheet" href="styles/football.css" />
 		<link rel="stylesheet" href="styles/login.css" />
+		<link rel="stylesheet" href="styles/user.css" />
 		<!-- endbuild -->
 	</head>
 	<body ng-app="activeApp">
@@ -43,7 +44,7 @@
 						<a class="navbar-brand" href="#/">active</a>
 					</div>
 
-					<div class="collapse navbar-collapse" id="js-navbar-collapse">
+					<div class="collapse navbar-collapse" id="js-navbar-collapse" ng-controller="MenuCtrl">
 						<ul class="nav navbar-nav">
 							<li class="active">
 								<a href="#/">Home</a>
@@ -53,11 +54,14 @@
 							<li ng-show="isLoggedIn">
 								<a ng-href="#/user">{{currentUser.username}}</a>
 							</li>
+							<li ng-show="isLoggedIn">
+								<a href="" ng-click="openChat()">Chat</a>
+							</li>
 							<li ng-show="!isLoggedIn">
 								<a href="#/login">Login</a>
 							</li>
 							<li ng-show="isLoggedIn">
-								<a href="#/login" ng-click="logoutFlag = true">Logout</a>
+								<a href="#/login" ng-click="logout()">Logout</a>
 							</li>
 						</ul>
 					</div>
@@ -102,6 +106,7 @@
 		<script src="bower_components/angular-route/angular-route.js"></script>
 		<script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
 		<script src="bower_components/angular-touch/angular-touch.js"></script>
+		<script src="bower_components/ng-file-upload/ng-file-upload.js"></script>
 		<script src="bower_components/ngmap/build/scripts/ng-map.js"></script>
 		<script src="bower_components/fullcalendar/dist/fullcalendar.js"></script>
 		<!-- endbower -->
@@ -118,6 +123,7 @@
 		<script src="scripts/controllers/user.js"></script>
 		<script src="scripts/controllers/login.js"></script>
 		<script src="scripts/controllers/unauthorized.js"></script>
+		<script src="scripts/controllers/menu.js"></script>
 		<!-- endcontroller -->
 
 		<!-- resource -->
@@ -129,8 +135,9 @@
 		<script src="scripts/services/flags.js"></script>
 		<script src="scripts/services/dateFormats.js"></script>
 		<script src="scripts/services/activityLocations.js"></script>
-		<script src="scripts/services/auth-service.js"></script>
-		<script src="scripts/services/menu-service.js"></script>
+		<script src="scripts/services/authService.js"></script>
+		<script src="scripts/services/menuService.js"></script>
+		<script src="scripts/services/fileValidator.js"></script>
 		<!-- endservice -->
 
 		<!-- filter -->

@@ -7,16 +7,7 @@
  * # LoginCtrl
  * Controller of the activeApp
  */
-angular.module('activeApp').controller('LoginCtrl', function($rootScope, $scope, UserResource, AuthService, $location, $cookies) {
-
-	//LOGOUT
-	if ($rootScope.logoutFlag) {
-		logout();
-	}
-
-	function logout() {
-		AuthService.clearUser();
-	}
+angular.module('activeApp').controller('LoginCtrl', function($timeout, $rootScope, $scope, UserResource, AuthService, $location, $cookies) {
 
 	//END LOGOUT
 
@@ -29,10 +20,13 @@ angular.module('activeApp').controller('LoginCtrl', function($rootScope, $scope,
 		$scope.loginPushed = false;
 		$scope.invalidCredentials = false;
 		$scope.login = {};
-		if(fromRegistration){
+		if (fromRegistration) {
 			$scope.login.username = $scope.user.username;
 			$scope.login.password = $scope.user.password;
 			$scope.fromRegistration = true;
+			$timeout(function() {
+				$scope.fromRegistration = false;
+			}, 3000);
 		}
 	};
 	//END INIT

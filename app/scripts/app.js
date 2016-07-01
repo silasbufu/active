@@ -8,7 +8,7 @@
  *
  * Main module of the application.
  */
-angular.module('activeApp', ['ngAnimate', 'ngCookies', 'ngResource', 'ngRoute', 'ngSanitize', 'ngTouch', 'ngMap']).config(function($routeProvider) {
+angular.module('activeApp', ['ngAnimate', 'ngCookies', 'ngResource', 'ngRoute', 'ngSanitize', 'ngTouch', 'ngMap', 'ngFileUpload']).config(function($routeProvider) {
 	$routeProvider.when('/', {
 		templateUrl : 'views/main.html',
 		controller : 'MainCtrl',
@@ -44,7 +44,6 @@ angular.module('activeApp', ['ngAnimate', 'ngCookies', 'ngResource', 'ngRoute', 
 angular.module('activeApp').run(function($rootScope, flags, activityLocations, AuthService, $route, $location, MenuService) {
 	$rootScope.flags = flags;
 	$rootScope.activityLocations = activityLocations;
-	$rootScope.logoutFlag = false;
 	$rootScope.$on('$routeChangeStart', function(event) {
 		var requiredLogin = MenuService.checkRequiredLogin($location.path());
 		if (requiredLogin) {
