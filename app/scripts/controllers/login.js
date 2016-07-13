@@ -82,20 +82,27 @@ angular.module('activeApp').controller('LoginCtrl', function($timeout, $rootScop
 	};
 
 	$scope.submitRegistration = function() {
-		$scope.differentPasswords = false;
+		// $scope.differentPasswords = false;
 		$scope.savePushed = true;
 		if ($scope.formObj.registrationForm.$valid) {
-			if ($scope.user.password !== $scope.data.repeatPassword) {
-				$scope.differentPasswords = true;
-				return;
-			}
 			if (!$scope.validUsername) {
 				return;
 			};
+			if($scope.differentPasswords){
+				return;
+			}
 			UserResource.save($scope.user, function() {
 				$scope.changeAction(true);
 			});
 		};
+	};
+
+	$scope.checkMatchingPasswords = function() {
+		if ($scope.data.repeatPassword && $scope.user.password !== $scope.data.repeatPassword) {
+			$scope.differentPasswords = true;
+		}else{
+			$scope.differentPasswords = false;
+		}
 	};
 
 	$scope.checkExistingUsername = function(username) {

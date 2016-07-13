@@ -26,6 +26,8 @@ angular.module('activeApp').controller('UserCtrl', function($rootScope, $scope, 
 		$scope.differentPasswords = false;
 		$scope.validUsername = null;
 		$scope.repeatPassword = null;
+		$scope.fileSizeMessage = null;
+		$scope.fileUploadMessage = null;
 		getUser();
 	}
 
@@ -61,16 +63,18 @@ angular.module('activeApp').controller('UserCtrl', function($rootScope, $scope, 
 					$scope.validUsername = true;
 				}
 			});
-		}else{
-			//so valid username message will dissappear when reentering original username 
+		} else {
+			//so valid username message will dissappear when reentering original username
 			$scope.validUsername = null;
 		}
 	};
-	
-	$scope.$watch('file', function () {
-        $scope.uploadFile($scope.file);
-    });
-	
+
+	$scope.$watch('file', function(newV) {
+		if(newV){
+			$scope.uploadFile(newV);	
+		}
+	});
+
 	$scope.uploadFile = function(file) {
 		if (file && FileValidatorService.parseFile(file) == true) {
 			$scope.upload = Upload.upload({
@@ -83,10 +87,18 @@ angular.module('activeApp').controller('UserCtrl', function($rootScope, $scope, 
 				file : file
 			});
 			$scope.upload.then(function(response) {
-				
+				$scope.fileUploadMessage = 'Avatar uploaded successfully.';
+				$scope.fileSizeMessage = null;
+				$timeout(function() {
+					$scope.fileUploadMessage = null;
+				}, 3000);
 			});
 		} else {
 			$scope.fileSizeMessage = 'Please select an image of less than 400kb.';
+			$scope.fileUploadMessage = null;
+			$timeout(function() {
+				$scope.fileSizeMessage = null;
+			}, 3000);
 			$scope.files = {};
 		}
 	};

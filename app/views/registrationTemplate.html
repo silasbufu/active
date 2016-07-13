@@ -41,7 +41,9 @@
 						ng-model="data.repeatPassword"
 						required
 						autocomplete="off"
-						maxlength="32">
+						maxlength="32"
+						ng-disabled="!user.password"
+						ng-blur="checkMatchingPasswords()">
 					</div>
 					<p class="text-danger" ng-show="differentPasswords">
 						Passwords do not match.
