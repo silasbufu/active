@@ -120,10 +120,18 @@
 				</div>
 			</div>
 			<div class="text-center row">
-				<span class="text-danger" ng-show="fileSizeMessage">{{fileSizeMessage}}</span>
-				<span class="text-success" ng-show="fileUploadMessage"> {{fileUploadMessage}} </span>
+				<span class="text-danger" 
+				ng-show="fileSizeMessage">{{fileSizeMessage}}</span>
+				<span class="text-success" 
+				ng-show="fileUploadMessage"> {{fileUploadMessage}} </span>
 			</div>
-			<h4>Current Avatar:</h4>
+			<div ng-show="user.avatar" 
+			class="text-center">
+				<h4>Current Avatar:</h4>
+				<div id="userAvatar">
+					<img ng-src="data:image/JPEG;base64,{{image}}">
+				</div>
+			</div>
 		</div>
 	</div>
 </div>

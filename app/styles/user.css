@@ -7,3 +7,13 @@
 	border-radius: 5px;
 	background-color: #f8f8f8;
 }
+#userAvatar{
+	display: inline-block;
+	width : 100px;
+	height : 100px;
+}
+#userAvatar img{
+	border-radius : 450px;
+	width: 100px;
+	height: 100px;
+}

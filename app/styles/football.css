@@ -51,6 +51,8 @@ button:-moz-focus-inner{
 .football-member-avatar {
 	margin-right: 5px;
 	border-radius : 450px;
+	width : 40px;
+	height : 40px;
 }
 .football-member-role-text {
 	font-weight: 400;

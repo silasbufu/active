@@ -7,7 +7,7 @@
  * # UserCtrl
  * Controller of the activeApp
  */
-angular.module('activeApp').controller('UserCtrl', function($rootScope, $scope, settings, UserResource, $timeout, Upload, FileValidatorService) {
+angular.module('activeApp').controller('UserCtrl', function($rootScope, $scope, settings, AuthService, UserResource, $timeout, Upload, FileValidatorService) {
 
 	function getUser() {
 		UserResource.get({
@@ -17,6 +17,9 @@ angular.module('activeApp').controller('UserCtrl', function($rootScope, $scope, 
 			//to avoid invalid user message for the original username
 			$scope.initialUser = $scope.user.username;
 			$scope.repeatPassword = $scope.user.password;
+			if (res.avatar) {
+				$scope.image = res.avatar;
+			}
 		});
 	}
 
@@ -44,6 +47,9 @@ angular.module('activeApp').controller('UserCtrl', function($rootScope, $scope, 
 				return;
 			};
 			UserResource.save($scope.user, function() {
+				AuthService.updateUser($scope.user);
+				$scope.differentPasswords = false;
+				$scope.validUsername = null;
 				$scope.saveSuccessfull = true;
 				$timeout(function() {
 					$scope.saveSuccessfull = false;
@@ -70,28 +76,31 @@ angular.module('activeApp').controller('UserCtrl', function($rootScope, $scope, 
 	};
 
 	$scope.$watch('file', function(newV) {
-		if(newV){
-			$scope.uploadFile(newV);	
+		if (newV) {
+			$scope.uploadFile(newV);
 		}
 	});
 
 	$scope.uploadFile = function(file) {
 		if (file && FileValidatorService.parseFile(file) == true) {
+			$scope.user.avatar = null;
 			$scope.upload = Upload.upload({
 				url : settings.protocol + settings.api + 'rest/avatar',
 				method : 'POST',
 				params : {
-					userId : $rootScope.currentUser.id,
+					user : $scope.user,
 					file : file
 				},
 				file : file
 			});
 			$scope.upload.then(function(response) {
+				AuthService.setUser(angular.toJson($scope.user));
 				$scope.fileUploadMessage = 'Avatar uploaded successfully.';
 				$scope.fileSizeMessage = null;
 				$timeout(function() {
 					$scope.fileUploadMessage = null;
 				}, 3000);
+				getUser();
 			});
 		} else {
 			$scope.fileSizeMessage = 'Please select an image of less than 400kb.';

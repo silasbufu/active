@@ -42,13 +42,7 @@ angular.module('activeApp').controller('LoginCtrl', function($timeout, $rootScop
 			}, function(res) {
 				if (res.userId) {
 					$scope.invalidCredentials = false;
-					var user = {
-						currentUser : {
-							id : res.userId,
-							username : res.username
-						}
-					};
-					AuthService.setUser(angular.toJson(user));
+					AuthService.setUser(res);
 					$location.path('/');
 				} else {
 					$scope.invalidCredentials = true;

@@ -2,23 +2,36 @@
 	<div class="col-lg-4 col-md-4 col-sm-4">
 		<div class="panel">
 			<div class="panel-encase">
-				<h3>FOOTBALL MEMBERS ({{footballMembersCount}})</h3>
+				<h3>FOOTBALL MEMBERS ({{footballMembersCount ? footballMembersCount : 0}})</h3>
 				<ul class="football-members-list">
-					<li class="fraier"ng-repeat="(key, footballMember) in footballMembers">
+					<li class="fraier"
+					ng-repeat="(key, footballMember) in footballMembers">
 						<a class="football-member"></a>
 						<div class="football-member-item">
-							<img class="football-member-avatar" src="images/football_small.png" ng-show="footballMember.id != 3">
-							<img class="football-member-avatar" src="images/steven.png" ng-show="footballMember.id == 3">
+							<img class="football-member-avatar" 
+							src="images/football_small.png" 
+							ng-show="!footballMember.avatar">
+							<img class="football-member-avatar" 
+							ng-src="data:image/JPEG;base64,{{footballMember.avatar}}" 
+							ng-show="footballMember.avatar">
 							<div id="member">
-								<a>{{footballMember.name}}</a>
+								<a>{{footballMember.fullName}}</a>
 								<br>
 								<span class="football-member-role-text">{{footballMember.role}}</span>
 							</div>
 							<div class="attenting-status pull-right">
-								<span ng-show="footballMember.status == flags.AttendingStatus.PENDING" class="glyphicon glyphicon-minus-sign" title="Pending"></span>
-								<span ng-show="footballMember.status == flags.AttendingStatus.GOING" class="glyphicon glyphicon-ok-sign" title="Going"></span>
-								<span ng-show="footballMember.status == flags.AttendingStatus.MAYBE" class="glyphicon glyphicon-question-sign" title="Maybe"></span>
-								<span ng-show="footballMember.status == flags.AttendingStatus.NOT_GOING" class="glyphicon glyphicon-remove-sign" title="Not Going"></span>
+								<span ng-show="footballMember.status == flags.AttendingStatus.PENDING" 
+								class="glyphicon glyphicon-minus-sign" 
+								title="Pending"></span>
+								<span ng-show="footballMember.status == flags.AttendingStatus.GOING" 
+								class="glyphicon glyphicon-ok-sign" 
+								title="Going"></span>
+								<span ng-show="footballMember.status == flags.AttendingStatus.MAYBE" 
+								class="glyphicon glyphicon-question-sign" 
+								title="Maybe"></span>
+								<span ng-show="footballMember.status == flags.AttendingStatus.NOT_GOING" 
+								class="glyphicon glyphicon-remove-sign" 
+								title="Not Going"></span>
 							</div>
 						</div>
 					</li>

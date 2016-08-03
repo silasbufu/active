@@ -7,48 +7,72 @@
  * # FootballCtrl
  * Controller of the activeApp
  */
-angular.module('activeApp').controller('FootballCtrl', function($scope, dateFormats) {
+angular.module('activeApp').controller('FootballCtrl', function($scope, dateFormats, UserResource) {
 
-	$scope.footballMembers = [{
-		id : 1,
-		name : 'Iuri Calaras',
-		role : 'Player',
-		status : Math.floor((Math.random() * ((3 - 0) + 1) + 0))
-	}, {
-		id : 2,
-		name : 'Dargos Munteanu',
-		role : 'Player',
-		status : Math.floor((Math.random() * ((3 - 0) + 1) + 0))
-	}, {
-		id : 3,
-		name : 'Stefan Busnita',
-		role : 'Captain',
-		status : Math.floor((Math.random() * ((3 - 0) + 1) + 0))
-	}, {
-		id : 4,
-		name : 'Lorena Ciobanu',
-		role : 'Goalkeeper',
-		status : Math.floor((Math.random() * ((3 - 0) + 1) + 0))
-	}, {
-		id : 5,
-		name : 'Lucian Gusa',
-		role : 'Killer',
-		status : Math.floor((Math.random() * ((3 - 0) + 1) + 0))
-	}, {
-		id : 5,
-		name : 'Cristi Chelaru',
-		role : 'EPO Legal Provider',
-		status : Math.floor((Math.random() * ((3 - 0) + 1) + 0))
-	}];
-
-	$scope.footballMembersCount = 5;
+	UserResource.query({}, function(data) {
+		if (data.length > 0) {
+			$scope.footballMembersCount = data.length;
+			$scope.footballMembers = angular.copy(data);
+		}
+	});
 
 	$scope.currentDate = moment().format(dateFormats.dateFormatMoment);
 
 	$('#calendar').fullCalendar({
-        fixedWeekCount : false,
-        contentHeight : "auto",
-        firstDay : 1
-   });
+		fixedWeekCount : false,
+		contentHeight : "auto",
+		firstDay : 1
+	});
+
+	$(document).ready(function() {
+		loadCalendar();
+	});
+
+
+
+
+
+	//FOR LATER USE
+
+	// function loadCalendar(){
+	// var list = [];
+	// $('#calendar').fullCalendar({
+	// lang:'ro',
+	// eventLimit: true,
+	// views: {
+	// agenda: {
+	// eventLimit: 4
+	// }
+	// },
+	// events: function(a,b,c,callback){
+	//
+	// $.ajax({
+	// url: appPath+'/events',
+	// data: {
+	// startTime:a.unix(),
+	// endTime:b.unix()
+	// },
+	// dataType: 'json',
+	// success: function(data) {
+	// $.each( data, function( index, value ){
+	// list[index] = {title: value.contentTitle,
+	// body:value.contentBody, start: moment(value.eventDate).format(),
+	// end: moment(value.eventEndDate).format(),
+	// eventAuthorFirstName:value.eventAuthorFirstName,
+	// eventAuthorLastName:value.eventAuthorLastName};
+	// });
+	// callback(list);
+	// }
+	// });
+	// },
+	// eventClick: function (calEvent,jsEvent,view) {
+	// $('#calModalLabel').text(calEvent.title);
+	// $('#calModalBody').html(calEvent.body);
+	// $('#calModalAuthor').text(' '+ calEvent.eventAuthorFirstName).append(' '+ calEvent.eventAuthorLastName);
+	// $('#calModalFooter').text(' '+ calEvent.start.format('DD MMM YYYY')).append(" - ").append(calEvent.end.format('DD MMM YYYY'));
+	// $('#eventModal').modal('toggle');
+	// }
+	// });
+	// }
 
 });
