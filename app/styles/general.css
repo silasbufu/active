@@ -18,3 +18,26 @@ body{
 #loginButton{
 	position : relative;
 }
+
+/*CALENDAR*/
+#calendar .fc-title{
+	cursor: pointer;
+}
+
+#calendar .fc-event{
+	line-height : 2 !important;;
+}
+
+#calendar a{
+	text-align : center;
+	background-color: #3B5998;
+}
+
+#calendar{
+	margin-bottom : 30px;
+}
+
+/*GENERAL MARGINS*/
+.generalTopMargin {
+	margin-top: 30px;
+}

@@ -14,7 +14,7 @@ angular.module('activeApp').controller('MainCtrl', function($scope, $filter, $lo
 	}
 	
 	$scope.selectActivity = function(activity){
-		var link = $filter('staticOptions')(activity, 'ActivityType');
+		var link = $filter('staticOptions')(activity, 'ActivityTypeLink');
 		$location.path(link);
 	};
 });

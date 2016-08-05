@@ -24,7 +24,7 @@ angular.module('activeApp').controller('UserCtrl', function($rootScope, $scope, 
 	}
 
 	function init() {
-		$scope.saveSuccessfull = false;
+		$scope.userAction = null;
 		$scope.savePushed = false;
 		$scope.differentPasswords = false;
 		$scope.validUsername = null;
@@ -50,9 +50,9 @@ angular.module('activeApp').controller('UserCtrl', function($rootScope, $scope, 
 				AuthService.updateUser($scope.user);
 				$scope.differentPasswords = false;
 				$scope.validUsername = null;
-				$scope.saveSuccessfull = true;
+				$scope.userAction = flags.UserAction.EDIT;
 				$timeout(function() {
-					$scope.saveSuccessfull = false;
+					$scope.userAction = null;
 				}, 3000);
 			});
 		}
