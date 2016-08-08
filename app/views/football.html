@@ -5,7 +5,7 @@
 				<h3>MEMBERS ({{footballMembersCount ? footballMembersCount : 0}})</h3>
 				<ul class="football-members-list">
 					<li class="fraier"
-					ng-repeat="(key, footballMember[0]) in footballMembers">
+					ng-repeat="(key, footballMember) in footballMembers">
 						<a class="football-member"></a>
 						<div class="football-member-item">
 							<img class="football-member-avatar"
@@ -20,15 +20,54 @@
 								<span class="football-member-role-text">{{footballMember.role}}</span>
 							</div>
 							<div class="attenting-status pull-right">
-								<span ng-show="footballMember.attendance[0].userAttendanceStatus == flags.AttendanceStatus.GOING"
+								<span ng-show="footballMember.userAttendanceStatus == flags.AttendanceStatus.GOING"
 								class="glyphicon glyphicon-ok-sign"
 								title="Going"></span>
-								<span ng-show="footballMember.attendance[0].userAttendanceStatus == flags.AttendanceStatus.MAYBE"
+								<span ng-show="footballMember.userAttendanceStatus == flags.AttendanceStatus.MAYBE"
 								class="glyphicon glyphicon-question-sign"
 								title="Maybe"></span>
-								<span ng-show="footballMember.attendance[0].userAttendanceStatus == flags.AttendanceStatus.NOT_GOING"
+								<span ng-show="footballMember.userAttendanceStatus == flags.AttendanceStatus.NOT_GOING"
 								class="glyphicon glyphicon-remove-sign"
 								title="Not Going"></span>
+							</div>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div class="panel">
+			<div class="panel-encase">
+				<h3>GUESTS ({{guestCount ? guestCount : 0}})</h3>
+				<div class="form-group">
+					<label>Name</label>
+					<div class="input-group">
+						<input type="text"
+						class="form-control"
+						ng-model="guest.fullName">
+						<div class="input-group-btn">
+							<div class="btn btn-success"
+							title="Add Guest"
+							ng-click="addGuest()">
+								<span class="glyphicon  glyphicon glyphicon-plus"></span>
+							</div>
+						</div>
+					</div>
+				</div>
+				<ul class="football-members-list">
+					<li class="fraier"
+					ng-repeat="(key, guestMember) in guestMembers">
+						<a class="football-member"></a>
+						<div class="football-member-item">
+							<img class="football-member-avatar"
+							src="images/football_small.png">
+							<div id="member">
+								<a>{{guestMember.fullName}}</a>
+								<br>
+								<span class="football-member-role-text">{{guestMember.role}}</span>
+							</div>
+							<div class="attenting-status pull-right">
+								<span class="glyphicon glyphicon-ok-sign"
+								title="Going"></span>
 							</div>
 						</div>
 					</li>
