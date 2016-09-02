@@ -8,7 +8,7 @@
  *
  * Main module of the application.
  */
-angular.module('activeApp', ['ngAnimate', 'ngCookies', 'ngResource', 'ngRoute', 'ngSanitize', 'ngTouch', 'ngMap', 'ngFileUpload']).config(function($routeProvider) {
+angular.module('activeApp', ['ngAnimate', 'ngCookies', 'ngResource', 'ngRoute', 'ngSanitize', 'ngTouch', 'ngMap', 'ngFileUpload', 'mp.colorPicker']).config(function($routeProvider) {
 	$routeProvider.when('/', {
 		templateUrl : 'views/main.html',
 		controller : 'MainCtrl',
@@ -41,7 +41,7 @@ angular.module('activeApp', ['ngAnimate', 'ngCookies', 'ngResource', 'ngRoute', 
 		redirectTo : '/'
 	});
 });
-angular.module('activeApp').run(function($rootScope, flags, activityLocations, AuthService, $route, $location, MenuService) {
+angular.module('activeApp').run(function($rootScope, flags, activityLocations, AuthService, $route, $location, MenuService, ThemeService) {
 	$rootScope.flags = flags;
 	$rootScope.activityLocations = activityLocations;
 	$rootScope.$on('$routeChangeStart', function(event) {
@@ -57,6 +57,7 @@ angular.module('activeApp').run(function($rootScope, flags, activityLocations, A
 		} else {
 			$rootScope.isLoggedIn = true;
 			$rootScope.currentUser = angular.copy(loggedIn.currentUser);
+			ThemeService.updateTheme($rootScope.currentUser);
 		}
 	}
 

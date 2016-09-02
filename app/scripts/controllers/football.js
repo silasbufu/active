@@ -7,27 +7,40 @@
  * # FootballCtrl
  * Controller of the activeApp
  */
-angular.module('activeApp').controller('FootballCtrl', function($rootScope, $scope, $filter, $timeout, flags, settings, dateFormats, UserResource, TestEventAttendanceResource, TestEventResource, GuestResource) {
+angular.module('activeApp').controller('FootballCtrl', function($rootScope, $scope, $filter, $timeout, flags, activityLocations, settings, dateFormats, UserResource, EventAttendanceResource, EventResource, GuestResource) {
 
 	function init() {
-		$scope.userAction = null;
+		$scope.eventAction = null;
+		$scope.guestAction = null;
 		$scope.currentDate = moment().format(dateFormats.dateFormatMoment);
 		resetEventDetails();
 	};
 
 	function resetEventDetails(saveCallback) {
+		$scope.attendanceListFlag = flags.AttendanceStatus.GOING;
 		$scope.eventList = [];
 		$scope.eventDaysDiff = null;
 		$scope.event = {};
-		$scope.guest = {};
 		$scope.showEventDetails = false;
+		resetGuest();
 		getEvents(saveCallback);
 	}
 
+	function resetGuest() {
+		$scope.guestCount = 0;
+		$scope.guestMembers = [];
+		$scope.guest = {};
+		$scope.showGuestDetails = false;
+	}
+
 	//USERS FOR EVENT
-	function getUsersForEvent(eventId) {
+	function resetUsers() {
 		$scope.footballMembersCount = 0;
 		$scope.footballMembers = [];
+	}
+
+	function getUsersForEvent(eventId) {
+		resetUsers();
 		UserResource.query({
 			eventId : eventId
 		}, function(data) {
@@ -39,30 +52,54 @@ angular.module('activeApp').controller('FootballCtrl', function($rootScope, $sco
 		});
 	};
 	//END USERS FOR EVENT
-	
+
 	//GUESTS FOR EVENT
-	$scope.addGuest = function(){
-		var guest = {
-			fullName : $scope.guest.fullName,
-			role : 'Guest',
-			eventId : $scope.event.eventId
-		};
-		GuestResource.save(guest, function(){
-			$scope.guest = {};
-			getGuestsForEvent($scope.event.eventId);
-		});
+	$scope.addGuest = function() {
+		if ($scope.guest.fullName) {
+			var guest = {
+				fullName : $scope.guest.fullName,
+				role : 'Guest',
+				eventId : $scope.event.eventId,
+				guestId : $scope.guest.guestId
+			};
+			GuestResource.save(guest, function() {
+				resetGuest();
+				getGuestsForEvent($scope.event.eventId);
+			});
+		}
 	};
-	
-	function getGuestsForEvent(eventId){
-		$scope.guestCount = 0;
-		$scope.guestMembers = [];
+
+	function getGuestsForEvent(eventId) {
 		GuestResource.query({
 			eventId : eventId
-		}, function(data){
-			angular.forEach(data, function(item, key) {
-				$scope.guestCount = data.length;
-				$scope.guestMembers.push(item);
-			});
+		}, function(data) {
+			// angular.forEach(data, function(item, key) {
+			$scope.guestCount = data.length;
+			$scope.guestMembers = angular.copy(data);
+			// });
+		});
+	};
+
+	$scope.selectGuest = function(guest) {
+		$scope.guest = angular.copy(guest);
+		$scope.showGuestDetails = true;
+	};
+
+	$scope.cancelEditGuest = function() {
+		$scope.guest = {};
+		$scope.showGuestDetails = false;
+	};
+
+	$scope.deleteGuest = function() {
+		GuestResource.delete({
+			guestId : $scope.guest.guestId
+		}, function() {
+			resetGuest();
+			$scope.guestAction = flags.UserAction.DELETE;
+			getGuestsForEvent($scope.event.eventId);
+			$timeout(function() {
+				$scope.guestAction = null;
+			}, 3000);
 		});
 	};
 	//END GUESTS FOR EVENT
@@ -70,12 +107,12 @@ angular.module('activeApp').controller('FootballCtrl', function($rootScope, $sco
 	//ATTENDANCE STATUS
 	$scope.changeAttendanceStatus = function(attendanceStatus) {
 		if ($scope.event) {
-			var testEventAttendance = {
+			var eventAttendance = {
 				userId : $rootScope.currentUser.id,
 				eventId : $scope.event.eventId,
 				userAttendanceStatus : attendanceStatus
 			};
-			TestEventAttendanceResource.save(testEventAttendance, function() {
+			EventAttendanceResource.save(eventAttendance, function() {
 				getUsersForEvent($scope.event.eventId);
 			});
 		}
@@ -84,7 +121,7 @@ angular.module('activeApp').controller('FootballCtrl', function($rootScope, $sco
 
 	//EVENTS
 	function getEvents(saveCallback) {
-		TestEventResource.query({
+		EventResource.query({
 			eventType : flags.ActivityType.FOOTBALL
 		}, function(data) {
 			var existsActiveEvent = false;
@@ -130,8 +167,9 @@ angular.module('activeApp').controller('FootballCtrl', function($rootScope, $sco
 			},
 			dayClick : function(date, jsEvent, view) {
 				var events = $('#calendar').fullCalendar('clientEvents');
-				if (hasEvent(date, events)) {
-					// selectEvent()
+				var event = hasEvent(date, events);
+				if (event) {
+					selectEvent(event);
 				} else {
 					newEvent(date);
 				}
@@ -142,7 +180,7 @@ angular.module('activeApp').controller('FootballCtrl', function($rootScope, $sco
 	function hasEvent(date, events) {
 		for (var i = 0; i < events.length; i++) {
 			if (moment(date).isSame(moment(events[i].start))) {
-				return true;
+				return events[i];
 			} else if (i == events.length - 1) {
 				return false;
 			}
@@ -150,6 +188,8 @@ angular.module('activeApp').controller('FootballCtrl', function($rootScope, $sco
 	}
 
 	function selectEvent(event) {
+		$scope.attendanceListFlag = flags.AttendanceStatus.GOING;
+		resetGuest();
 		fillSelectedEvent(event);
 		getUsersForEvent(event.id);
 		getGuestsForEvent(event.id);
@@ -170,7 +210,12 @@ angular.module('activeApp').controller('FootballCtrl', function($rootScope, $sco
 		$scope.eventDaysDiff = (date).diff(moment(), 'days');
 		if ($scope.eventDaysDiff < 0) {
 			$scope.showEventDetails = false;
+			resetGuest();
+			resetUsers();
+			$scope.event = {};
 		} else {
+			resetGuest();
+			resetUsers();
 			$scope.event = {
 				eventType : flags.ActivityType.FOOTBALL,
 				eventDate : moment(date).format(dateFormats.dateFormatMoment),
@@ -183,11 +228,11 @@ angular.module('activeApp').controller('FootballCtrl', function($rootScope, $sco
 
 
 	$scope.saveEvent = function() {
-		TestEventResource.save($scope.event, function() {
+		EventResource.save($scope.event, function() {
 			resetEventDetails(true);
-			$scope.userAction = flags.UserAction.SAVE;
+			$scope.eventAction = flags.UserAction.SAVE;
 			$timeout(function() {
-				$scope.userAction = null;
+				$scope.eventAction = null;
 			}, 3000);
 		});
 	};
@@ -201,13 +246,17 @@ angular.module('activeApp').controller('FootballCtrl', function($rootScope, $sco
 			eventId : $scope.event.eventId
 		}, function() {
 			resetEventDetails(true);
-			$scope.userAction = flags.UserAction.DELETE;
+			$scope.eventAction = flags.UserAction.DELETE;
 			$timeout(function() {
-				$scope.userAction = null;
+				$scope.eventAction = null;
 			}, 3000);
 		});
 	};
 	//END EVENTS
+
+	//EVENT LOCATION
+
+	//END EVENT LOCATION
 
 	init();
 

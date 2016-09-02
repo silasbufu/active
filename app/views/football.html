@@ -2,10 +2,30 @@
 	<div class="col-lg-4 col-md-4 col-sm-4">
 		<div class="panel">
 			<div class="panel-encase">
-				<h3>MEMBERS ({{footballMembersCount ? footballMembersCount : 0}})</h3>
+				<h3>MEMBER REPLIES ({{footballMembersCount ? footballMembersCount : 0}})</h3>
+				<div class="btn-group btn-group-justified ">
+					<div class="btn-group">
+						<button class="btn btn-success" type="button"
+						ng-click="attendanceListFlag = flags.AttendanceStatus.GOING">
+							Going
+						</button>
+					</div>
+					<div class="btn-group">
+						<button class="btn btn-warning" type="button"
+						ng-click="attendanceListFlag = flags.AttendanceStatus.MAYBE">
+							Maybe
+						</button>
+					</div>
+					<div class="btn-group">
+						<button class="btn btn-danger" type="button"
+						ng-click="attendanceListFlag = flags.AttendanceStatus.NOT_GOING">
+							Not Going
+						</button>
+					</div>
+				</div>
 				<ul class="football-members-list">
-					<li class="fraier"
-					ng-repeat="(key, footballMember) in footballMembers">
+					<li class="fraier generalTopMargin"
+					ng-repeat="footballMember in footballMembers | orderBy : 'fullName' | filter : {userAttendanceStatus: attendanceListFlag }">
 						<a class="football-member"></a>
 						<div class="football-member-item">
 							<img class="football-member-avatar"
@@ -19,17 +39,6 @@
 								<br>
 								<span class="football-member-role-text">{{footballMember.role}}</span>
 							</div>
-							<div class="attenting-status pull-right">
-								<span ng-show="footballMember.userAttendanceStatus == flags.AttendanceStatus.GOING"
-								class="glyphicon glyphicon-ok-sign"
-								title="Going"></span>
-								<span ng-show="footballMember.userAttendanceStatus == flags.AttendanceStatus.MAYBE"
-								class="glyphicon glyphicon-question-sign"
-								title="Maybe"></span>
-								<span ng-show="footballMember.userAttendanceStatus == flags.AttendanceStatus.NOT_GOING"
-								class="glyphicon glyphicon-remove-sign"
-								title="Not Going"></span>
-							</div>
 						</div>
 					</li>
 				</ul>
@@ -38,26 +47,29 @@
 		<div class="panel">
 			<div class="panel-encase">
 				<h3>GUESTS ({{guestCount ? guestCount : 0}})</h3>
-				<div class="form-group">
+				<div>
 					<label>Name</label>
 					<div class="input-group">
 						<input type="text"
 						class="form-control"
-						ng-model="guest.fullName">
+						ng-model="guest.fullName"
+						ng-disabled="!event.eventId || event.eventStatus == flags.EventStatus.INACTIVE">
 						<div class="input-group-btn">
 							<div class="btn btn-success"
 							title="Add Guest"
-							ng-click="addGuest()">
+							ng-click="(!event.eventId || event.eventStatus == flags.EventStatus.INACTIVE) || addGuest()"
+							ng-disabled="!event.eventId || event.eventStatus == flags.EventStatus.INACTIVE">
 								<span class="glyphicon  glyphicon glyphicon-plus"></span>
 							</div>
 						</div>
 					</div>
 				</div>
-				<ul class="football-members-list">
-					<li class="fraier"
-					ng-repeat="(key, guestMember) in guestMembers">
+				<ul class="football-members-list ">
+					<li class="fraier generalTopMargin"
+					ng-repeat="guestMember in guestMembers | orderBy : 'fullName' ">
 						<a class="football-member"></a>
-						<div class="football-member-item">
+						<div class="football-member-item"
+						ng-click="selectGuest(guestMember)">
 							<img class="football-member-avatar"
 							src="images/football_small.png">
 							<div id="member">
@@ -65,37 +77,67 @@
 								<br>
 								<span class="football-member-role-text">{{guestMember.role}}</span>
 							</div>
-							<div class="attenting-status pull-right">
-								<span class="glyphicon glyphicon-ok-sign"
-								title="Going"></span>
-							</div>
 						</div>
 					</li>
+					{{showGuestActions}}
 				</ul>
+				<span id="guestActions" ng-show="showGuestDetails" >
+					<div class="btn-group btn-group-justified generalTopMargin">
+						<div class="btn-group">
+							<button class="btn btn-success"
+							type="button"
+							ng-click="addGuest()"
+							ng-disabled="!event.eventId || event.eventStatus == flags.EventStatus.INACTIVE">
+								Save 
+							</button>
+						</div>
+						<div class="btn-group">
+							<button class="btn btn-warning" type="button"
+							ng-click="cancelEditGuest()">
+								Cancel
+							</button>
+						</div>
+						<div class="btn-group">
+							<button class="btn btn-danger" type="button"
+							ng-click="deleteGuest()"
+							ng-disabled="!event.eventId || event.eventStatus == flags.EventStatus.INACTIVE">
+								Delete 
+							</button>
+						</div>
+					</div> </span>
+				<p class="text-success generalTopMargin" ng-show="guestAction == flags.UserAction.DELETE">
+					Guest has been removed successfully.
+				</p>
 			</div>
 		</div>
 	</div>
 	<div class="col-lg-4 col-md-4 col-sm-4">
 		<div class="panel">
 			<div class="panel-encase">
-				<h3>SELECTED EVENT</h3>
-				<h4>{{event.eventDate}}</h4>
+				<h3>{{event.eventId ? event.eventDate : 'NO ACTIVE EVENT'}}</h3>
+				<!-- <h4>{{event.eventDate}}</h4> -->
 				<div class="btn-group btn-group-justified">
 					<div class="btn-group">
-						<button class="btn btn-success" type="button"
-						ng-click="changeAttendanceStatus(flags.AttendanceStatus.GOING)">
+						<button class="btn btn-success"
+						type="button"
+						ng-click="changeAttendanceStatus(flags.AttendanceStatus.GOING)"
+						ng-disabled="!event.eventId || event.eventStatus == flags.EventStatus.INACTIVE">
 							Going
 						</button>
 					</div>
 					<div class="btn-group">
-						<button class="btn btn-warning" type="button"
-						ng-click="changeAttendanceStatus(flags.AttendanceStatus.MAYBE)">
+						<button class="btn btn-warning"
+						type="button"
+						ng-click="changeAttendanceStatus(flags.AttendanceStatus.MAYBE)"
+						ng-disabled="!event.eventId || event.eventStatus == flags.EventStatus.INACTIVE">
 							Maybe
 						</button>
 					</div>
 					<div class="btn-group">
-						<button class="btn btn-danger" type="button"
-						ng-click="changeAttendanceStatus(flags.AttendanceStatus.NOT_GOING)">
+						<button class="btn btn-danger"
+						type="button"
+						ng-click="changeAttendanceStatus(flags.AttendanceStatus.NOT_GOING)"
+						ng-disabled="!event.eventId || event.eventStatus == flags.EventStatus.INACTIVE">
 							Not Going
 						</button>
 					</div>
@@ -107,8 +149,8 @@
 				<div class="panel-encase">
 					<h3>EVENT CALENDAR</h3>
 					<div id="calendar"></div>
-					<span id="eventDetails" ng-show="showEventDetails">
-						<div class="row">
+					<span id="eventDetails" ng-show="showEventDetails" >
+						<div class="row generalTopMargin">
 							<div class="form-group col-md-6">
 								<label>Event Date</label>
 								<input type="text"
@@ -129,7 +171,7 @@
 								<button class="btn btn-success" type="button"
 								ng-click="saveEvent()"
 								ng-disabled="eventDaysDiff<0 || event.eventId">
-									Create Event
+									Save
 								</button>
 							</div>
 							<div class="btn-group">
@@ -142,15 +184,15 @@
 								<button class="btn btn-danger" type="button"
 								ng-click="deleteEvent()"
 								ng-disabled="!event.eventId">
-									Delete Event
+									Delete 
 								</button>
 							</div>
 						</div> </span>
-					<p class="text-success" ng-show="userAction == flags.UserAction.SAVE">
+					<p class="text-success generalTopMargin" ng-show="eventAction == flags.UserAction.SAVE">
 						Event has been saved successfully.
 					</p>
-					<p class="text-success" ng-show="userAction == flags.UserAction.DELETE">
-						Event has been deleted successfully.
+					<p class="text-success generalTopMargin" ng-show="eventAction == flags.UserAction.DELETE">
+						Event has been removed successfully.
 					</p>
 				</div>
 			</form>
@@ -160,25 +202,10 @@
 		<div class="panel">
 			<div class="panel-encase">
 				<h3>LOCATION</h3>
-				<div>
-					<ng-map center="{{activityLocations.OffsideArena.coordinates}}">
-						<marker position="{{activityLocations.OffsideArena.coordinates}}" title="Offside Arena"></marker>
-					</ng-map>
-				</div>
-				<div id="generalTopMargin">
-					<p>
-						Name : {{activityLocations.OffsideArena.name}}
-					</p>
-					<p>
-						Address : {{activityLocations.OffsideArena.address}}
-					</p>
-					<p>
-						Phone : {{activityLocations.OffsideArena.phone}}
-					</p>
-					<p>
-						E-mail : {{activityLocations.OffsideArena.email}}
-					</p>
-				</div>
+				<activity-location
+				center="center"
+				position="position"
+				location-details="location"></activity-location>
 			</div>
 		</div>
 	</div>

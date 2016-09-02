@@ -1,17 +1,3 @@
-/*GENERAL*/
-.panel {
-	background-color: white;
-	border: 1px solid #3B5998;
-	border-radius: 5px;
-}
-
-.panel-encase {
-	padding: 20px;
-}
-
-p {
-	font-weight : 600;
-}
 
 /*HEADER TAGS*/
 h3 {
@@ -39,6 +25,7 @@ button:-moz-focus-inner{
 
 /*Football Members*/
 .football-members-list {
+	margin-bottom : 0px;
 	list-style: outside none none;
 	padding: 0 25px;
 }

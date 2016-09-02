@@ -1,0 +1,102 @@
+<div>
+	<form name="eventLocationForm" class="eventLocationForm">
+		<div class="generalBottomMargin">
+			<div class="input-group">
+				<select type="text"
+				class="form-control">
+					<option>Offside Arena</option>
+				</select>
+				<div class="input-group-btn">
+					<div class="btn btn-success"
+					title="Add Location"
+					ng-click="addLocation()">
+						<span class="glyphicon  glyphicon glyphicon-plus"></span>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="generalBottomMargin">
+			<ng-map center="{{center}}" on-click="addMarker()">
+				<marker position="{{position}}"
+				icon="{
+					url : 'images/google_marker_green.png'
+				}"></marker>
+			</ng-map>
+		</div>
+		<span ng-show="showLocationDetails">
+			<p>
+				Name : {{locationDetails.name}}
+			</p>
+			<p>
+				Address : {{locationDetails.address}}
+			</p>
+			<p>
+				Phone : {{locationDetails.phone}}
+			</p>
+			<p class="noBottomMargin">
+				E-mail : {{locationDetails.email}}
+			</p> </span>
+		<span ng-show="!showLocationDetails">
+			<div class="form-group">
+				<label>Name:<span class="text-danger">*</span></label>
+				<input type="text"
+				class="form-control"
+				ng-class="{'alert-danger' : eventLocationForm.name.$error.required && savePushed}"
+				name="name"
+				ng-model="locationSaveObj.name"
+				required
+				autocomplete="off"
+				maxlength="64">
+			</div>
+			<div class="form-group">
+				<label>Address:<span class="text-danger">*</span></label>
+				<input class="form-control"
+				ng-class="{'alert-danger' : eventLocationForm.address.$error.required && savePushed}"
+				name="address"
+				places-auto-complete size="80"
+				ng-model="locationSaveObj.address"
+				component-restrictions="{country:'ro'}"
+				on-place-changed="placeChanged()"
+				required
+				maxlength="256">
+			</div>
+			<div class="form-group">
+				<label>Phone:</label>
+				<input type="text"
+				class="form-control"
+				name="phone"
+				ng-model="locationSaveObj.phone"
+				autocomplete="off"
+				maxlength="32">
+			</div>
+			<div class="form-group">
+				<label>Email:</label>
+				<input type="text"
+				class="form-control"
+				name="email"
+				ng-model="locationSaveObj.email"
+				autocomplete="off"
+				maxlength="32">
+			</div>
+			<div class="btn-group btn-group-justified generalTopMargin">
+				<div class="btn-group">
+					<button class="btn btn-success" type="button"
+					ng-click="saveLocation()">
+						Save 
+					</button>
+				</div>
+				<div class="btn-group">
+					<button class="btn btn-warning" type="button"
+					ng-click="cancelAddLocation()">
+						Cancel
+					</button>
+				</div>
+				<div class="btn-group">
+					<button class="btn btn-danger" type="button"
+					ng-click="deleteLocation()">
+						Delete
+					</button>
+				</div>
+			</div> </span>
+	</form>
+</div>

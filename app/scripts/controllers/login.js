@@ -41,6 +41,7 @@ angular.module('activeApp').controller('LoginCtrl', function($timeout, $rootScop
 				password : btoa($scope.login.password)
 			}, function(res) {
 				if (res.userId) {
+					
 					$scope.invalidCredentials = false;
 					AuthService.setUser(res);
 					$location.path('/');

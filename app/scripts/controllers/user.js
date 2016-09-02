@@ -7,7 +7,7 @@
  * # UserCtrl
  * Controller of the activeApp
  */
-angular.module('activeApp').controller('UserCtrl', function($rootScope, $scope, settings, AuthService, UserResource, $timeout, Upload, FileValidatorService) {
+angular.module('activeApp').controller('UserCtrl', function($rootScope, $scope, settings, flags, AuthService, ThemeService, UserResource, $timeout, Upload, FileValidatorService) {
 
 	function getUser() {
 		UserResource.get({
@@ -24,6 +24,7 @@ angular.module('activeApp').controller('UserCtrl', function($rootScope, $scope, 
 	}
 
 	function init() {
+		$scope.customTheme = null;
 		$scope.userAction = null;
 		$scope.savePushed = false;
 		$scope.differentPasswords = false;
@@ -35,10 +36,11 @@ angular.module('activeApp').controller('UserCtrl', function($rootScope, $scope, 
 	}
 
 
-	$scope.saveChanges = function() {
+	$scope.saveChanges = function(customTheme) {
 		$scope.differentPasswords = false;
 		$scope.savePushed = true;
 		if ($scope.userForm.$valid) {
+			$scope.user.customTheme = flags.NumericBooleanFlag.NO;
 			if ($scope.user.password !== $scope.repeatPassword) {
 				$scope.differentPasswords = true;
 				return;
@@ -46,16 +48,31 @@ angular.module('activeApp').controller('UserCtrl', function($rootScope, $scope, 
 			if ($scope.validUsername == false) {
 				return;
 			};
+			if (customTheme) {
+				$scope.user.customTheme = flags.NumericBooleanFlag.YES;
+			}
 			UserResource.save($scope.user, function() {
+				if(!customTheme){
+					ThemeService.clearTheme();
+				}
 				AuthService.updateUser($scope.user);
 				$scope.differentPasswords = false;
 				$scope.validUsername = null;
-				$scope.userAction = flags.UserAction.EDIT;
+				$scope.userAction = flags.UserAction.EDIT_USER;
 				$timeout(function() {
 					$scope.userAction = null;
 				}, 3000);
 			});
 		}
+	};
+
+	$scope.resetTheme = function() {
+		$scope.user.menuBackground = null;
+		$scope.user.menuText = null;
+		$scope.user.bodyBackground = null;
+		$scope.user.panelBackground = null;
+		$scope.user.bodyText = null;
+		$scope.saveChanges();
 	};
 
 	$scope.checkExistingUsername = function(username) {
@@ -94,7 +111,7 @@ angular.module('activeApp').controller('UserCtrl', function($rootScope, $scope, 
 				file : file
 			});
 			$scope.upload.then(function(response) {
-				AuthService.setUser(angular.toJson($scope.user));
+				AuthService.updateUser($scope.user);
 				$scope.fileUploadMessage = 'Avatar uploaded successfully.';
 				$scope.fileSizeMessage = null;
 				$timeout(function() {

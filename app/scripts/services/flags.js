@@ -8,21 +8,22 @@
  * Constant in the activeApp.
  */
 angular.module('activeApp').constant('flags', function() {
-	var NumericBooleanFlag = {
-		YES : 1,
-		NO : 0
-	};
 	return {
+		NumericBooleanFlag : {
+			YES : 1,
+			NO : 0
+		},
 		UserAction : {
 			SAVE : 1,
-			EDIT : 2,
-			DELETE : 3
+			EDIT_USER : 2,
+			EDIT_THEME : 3,
+			DELETE : 4
 		},
 		ActivityType : {
 			FOOTBALL : 1,
 			TENNIS : 2
 		},
-		AttendanceStatus:{
+		AttendanceStatus : {
 			GOING : 1,
 			MAYBE : 2,
 			NOT_GOING : 3
@@ -30,6 +31,6 @@ angular.module('activeApp').constant('flags', function() {
 		EventStatus : {
 			INACTIVE : 0,
 			ACTIVE : 1
-		} 
+		}
 	};
 }());

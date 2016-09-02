@@ -7,7 +7,7 @@
  * # authService
  * Service in the activeApp.
  */
-angular.module('activeApp').service('AuthService', function($rootScope, $cookies) {
+angular.module('activeApp').service('AuthService', function($rootScope, $cookies, ThemeService) {
 
 	var user;
 
@@ -15,13 +15,20 @@ angular.module('activeApp').service('AuthService', function($rootScope, $cookies
 		user = {
 			currentUser : {
 				id : value.userId,
-				username : value.username
+				username : value.username,
+				customTheme : value.customTheme,
+				menuBackground : value.menuBackground,
+				menuText : value.menuText,
+				bodyBackground : value.bodyBackground,
+				panelBackground : value.panelBackground,
+				bodyText : value.bodyText
 			}
 		};
 		$cookies.put('user', angular.toJson(user));
 	};
 
 	this.clearUser = function() {
+		ThemeService.clearTheme();
 		user = {};
 		$cookies.remove('user');
 		$rootScope.isLoggedIn = false;
@@ -40,6 +47,10 @@ angular.module('activeApp').service('AuthService', function($rootScope, $cookies
 	this.updateUser = function(value) {
 		this.setUser(value);
 		$rootScope.currentUser = angular.copy(this.isLoggedIn().currentUser);
+		if($rootScope.currentUser.customTheme){
+			console.log($rootScope.currentUser)
+			ThemeService.updateTheme($rootScope.currentUser);
+		}
 	};
 
 });

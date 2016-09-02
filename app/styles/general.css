@@ -5,6 +5,20 @@ body{
 	background-color: #f8f8f8;
 }	
 
+.panel {
+	background-color: white;
+	border: 1px solid #3B5998;
+	border-radius: 5px;
+}
+
+.panel-encase {
+	padding: 20px;
+}
+
+p {
+	font-weight : 600;
+}
+
 /*NAVBAR*/
 .navbar-custom{
 	background-color : #3B5998;
@@ -32,12 +46,20 @@ body{
 	text-align : center;
 	background-color: #3B5998;
 }
-
-#calendar{
-	margin-bottom : 30px;
-}
-
 /*GENERAL MARGINS*/
 .generalTopMargin {
 	margin-top: 30px;
 }
+
+.generalBottomMargin {
+	margin-bottom: 30px;
+}
+
+.noBottomMargin {
+	margin-bottom: 0px;
+}
+
+/*html *
+{
+   color: red !important;
+}*/

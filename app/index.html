@@ -10,6 +10,7 @@
 		<!-- bower:css -->
 		<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
 		<link rel="stylesheet" href="bower_components/fullcalendar/dist/fullcalendar.css" />
+		<link rel="stylesheet" href="bower_components/angular-color-picker/angular-color-picker.css" />
 		<!-- endbower -->
 		<!-- endbuild -->
 		<!-- fonts -->
@@ -22,6 +23,7 @@
 		<link rel="stylesheet" href="styles/football.css" />
 		<link rel="stylesheet" href="styles/login.css" />
 		<link rel="stylesheet" href="styles/user.css" />
+		<link rel="stylesheet" href="styles/customTheme.css" />
 		<!-- endbuild -->
 	</head>
 	<body ng-app="activeApp">
@@ -91,7 +93,7 @@
 		</script> -->
 
 		<!-- Google Maps Api -->
-		<script src="http://maps.google.com/maps/api/js"></script>
+		<script src="http://maps.google.com/maps/api/js?libraries=placeses,visualization,drawing,geometry,places"></script>
 
 		<!-- build:js(.) scripts/vendor.js -->
 		<!-- bower:js -->
@@ -109,6 +111,7 @@
 		<script src="bower_components/ng-file-upload/ng-file-upload.js"></script>
 		<script src="bower_components/ngmap/build/scripts/ng-map.js"></script>
 		<script src="bower_components/fullcalendar/dist/fullcalendar.js"></script>
+		<script src="bower_components/angular-color-picker/angular-color-picker.js"></script>
 		<!-- endbower -->
 		<!-- endbuild -->
 
@@ -125,12 +128,17 @@
 		<script src="scripts/controllers/unauthorized.js"></script>
 		<script src="scripts/controllers/menu.js"></script>
 		<!-- endcontroller -->
+		
+		<!-- directive -->
+		<script src="scripts/directives/activityLocation.js"></script>
+		<!-- enddirective -->
 
 		<!-- resource -->
 		<script src="scripts/resources/user.js"></script>
-		<script src="scripts/resources/testEventAttendance.js"></script>
-		<script src="scripts/resources/testEvent.js"></script>
+		<script src="scripts/resources/eventAttendance.js"></script>
+		<script src="scripts/resources/event.js"></script>
 		<script src="scripts/resources/guest.js"></script>
+		<script src="scripts/resources/eventLocation.js"></script>
 		<!-- endresource -->
 
 		<!-- service -->
@@ -141,6 +149,7 @@
 		<script src="scripts/services/authService.js"></script>
 		<script src="scripts/services/menuService.js"></script>
 		<script src="scripts/services/fileValidator.js"></script>
+		<script src="scripts/services/themeService.js"></script>
 		<!-- endservice -->
 
 		<!-- filter -->

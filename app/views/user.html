@@ -86,7 +86,7 @@
 					autocomplete="off"
 					maxlength="32">
 				</div>
-				<p class="text-success" ng-show="userAction == flags.UserAction.EDIT">
+				<p class="text-success" ng-show="userAction == flags.UserAction.EDIT_USER">
 					Changes have been saved successfully.
 				</p>
 				<div class="form-group">
@@ -120,16 +120,92 @@
 				</div>
 			</div>
 			<div class="text-center row">
-				<span class="text-danger" 
+				<span class="text-danger"
 				ng-show="fileSizeMessage">{{fileSizeMessage}}</span>
-				<span class="text-success" 
+				<span class="text-success"
 				ng-show="fileUploadMessage"> {{fileUploadMessage}} </span>
 			</div>
-			<div ng-show="user.avatar" 
+			<div ng-show="user.avatar"
 			class="text-center">
 				<h4>Current Avatar:</h4>
 				<div id="userAvatar">
 					<img ng-src="data:image/JPEG;base64,{{image}}">
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="col-sm-4">
+	<div class="panel">
+		<div class="panel-encase">
+			<h3>CUSTOM THEME</h3>
+			<div class="form-group">
+				<label>Menu Background:</label>
+				<input type="text"
+				class="form-control"
+				name="menuBackground"
+				ng-model="user.menuBackground"
+				autocomplete="off"
+				maxlength="64">
+			</div>
+			<div class="form-group">
+				<label>Menu Text:</label>
+				<input type="text"
+				class="form-control"
+				name="menuText"
+				ng-model="user.menuText"
+				autocomplete="off"
+				maxlength="64">
+			</div>
+			<div class="form-group">
+				<label>General Background</label>
+				<input type="text"
+				class="form-control"
+				name="bodyBackground"
+				ng-model="user.bodyBackground"
+				autocomplete="off"
+				maxlength="64">
+			</div>
+			<div class="form-group">
+				<label>General Text:</label>
+				<input type="text"
+				class="form-control"
+				name="bodyText"
+				ng-model="user.bodyText"
+				autocomplete="off"
+				maxlength="64">
+			</div>
+			<div class="form-group">
+				<label>Panel Background:</label>
+				<input type="text"
+				class="form-control"
+				name="panelBackground"
+				ng-model="user.panelBackground"
+				autocomplete="off"
+				maxlength="64">
+			</div>
+			<div class="form-group generalTopMargin">
+				<color-picker ng-model="color"></color-picker>
+				<input type="text"
+				class="form-control"
+				ng-model="color"
+				ng-init="color = '#f05a28'">
+			</div>
+			<p class="text-success" ng-show="userAction == flags.UserAction.EDIT_USER">
+				Changes have been saved successfully.
+			</p>
+			<div class="btn-group btn-group-justified ">
+				<div class="btn-group">
+					<button type="button" class="btn form-control btn-success" ng-click="saveChanges(true)">
+						Save Changes
+					</button>
+				</div>
+				<div class="btn-group">
+					<button class="btn btn-warning" type="button"
+					ng-click="resetTheme()">
+						Reset Theme
+					</button>
 				</div>
 			</div>
 		</div>
