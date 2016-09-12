@@ -7,14 +7,16 @@
  * # MainCtrl
  * Controller of the activeApp
  */
-angular.module('activeApp').controller('MainCtrl', function($scope, $filter, $location) {
+angular.module('activeApp').controller('MainCtrl', function($scope, $filter, $location, $cookies, SelectActivityService) {
 
 	function init() {
 		$scope.selectedActivity = null;
 	}
-	
-	$scope.selectActivity = function(activity){
-		var link = $filter('staticOptions')(activity, 'ActivityTypeLink');
-		$location.path(link);
+
+
+	$scope.selectActivity = function(activity) {
+		// SelectActivityService.setActivityType(activity);
+		$cookies.put('activityType', activity);
+		$location.path('/activity');
 	};
 });

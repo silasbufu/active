@@ -2,118 +2,6 @@
 	<div class="col-lg-4 col-md-4 col-sm-4">
 		<div class="panel">
 			<div class="panel-encase">
-				<h3>MEMBER REPLIES ({{footballMembersCount ? footballMembersCount : 0}})</h3>
-				<div class="btn-group btn-group-justified ">
-					<div class="btn-group">
-						<button class="btn btn-success" type="button"
-						ng-click="attendanceListFlag = flags.AttendanceStatus.GOING">
-							Going
-						</button>
-					</div>
-					<div class="btn-group">
-						<button class="btn btn-warning" type="button"
-						ng-click="attendanceListFlag = flags.AttendanceStatus.MAYBE">
-							Maybe
-						</button>
-					</div>
-					<div class="btn-group">
-						<button class="btn btn-danger" type="button"
-						ng-click="attendanceListFlag = flags.AttendanceStatus.NOT_GOING">
-							Not Going
-						</button>
-					</div>
-				</div>
-				<ul class="football-members-list">
-					<li class="fraier generalTopMargin"
-					ng-repeat="footballMember in footballMembers | orderBy : 'fullName' | filter : {userAttendanceStatus: attendanceListFlag }">
-						<a class="football-member"></a>
-						<div class="football-member-item">
-							<img class="football-member-avatar"
-							src="images/football_small.png"
-							ng-show="!footballMember.avatar">
-							<img class="football-member-avatar"
-							ng-src="data:image/JPEG;base64,{{footballMember.avatar}}"
-							ng-show="footballMember.avatar">
-							<div id="member">
-								<a>{{footballMember.fullName}}</a>
-								<br>
-								<span class="football-member-role-text">{{footballMember.role}}</span>
-							</div>
-						</div>
-					</li>
-				</ul>
-			</div>
-		</div>
-		<div class="panel">
-			<div class="panel-encase">
-				<h3>GUESTS ({{guestCount ? guestCount : 0}})</h3>
-				<div>
-					<label>Name</label>
-					<div class="input-group">
-						<input type="text"
-						class="form-control"
-						ng-model="guest.fullName"
-						ng-disabled="!event.eventId || event.eventStatus == flags.EventStatus.INACTIVE">
-						<div class="input-group-btn">
-							<div class="btn btn-success"
-							title="Add Guest"
-							ng-click="(!event.eventId || event.eventStatus == flags.EventStatus.INACTIVE) || addGuest()"
-							ng-disabled="!event.eventId || event.eventStatus == flags.EventStatus.INACTIVE">
-								<span class="glyphicon  glyphicon glyphicon-plus"></span>
-							</div>
-						</div>
-					</div>
-				</div>
-				<ul class="football-members-list ">
-					<li class="fraier generalTopMargin"
-					ng-repeat="guestMember in guestMembers | orderBy : 'fullName' ">
-						<a class="football-member"></a>
-						<div class="football-member-item"
-						ng-click="selectGuest(guestMember)">
-							<img class="football-member-avatar"
-							src="images/football_small.png">
-							<div id="member">
-								<a>{{guestMember.fullName}}</a>
-								<br>
-								<span class="football-member-role-text">{{guestMember.role}}</span>
-							</div>
-						</div>
-					</li>
-					{{showGuestActions}}
-				</ul>
-				<span id="guestActions" ng-show="showGuestDetails" >
-					<div class="btn-group btn-group-justified generalTopMargin">
-						<div class="btn-group">
-							<button class="btn btn-success"
-							type="button"
-							ng-click="addGuest()"
-							ng-disabled="!event.eventId || event.eventStatus == flags.EventStatus.INACTIVE">
-								Save 
-							</button>
-						</div>
-						<div class="btn-group">
-							<button class="btn btn-warning" type="button"
-							ng-click="cancelEditGuest()">
-								Cancel
-							</button>
-						</div>
-						<div class="btn-group">
-							<button class="btn btn-danger" type="button"
-							ng-click="deleteGuest()"
-							ng-disabled="!event.eventId || event.eventStatus == flags.EventStatus.INACTIVE">
-								Delete 
-							</button>
-						</div>
-					</div> </span>
-				<p class="text-success generalTopMargin" ng-show="guestAction == flags.UserAction.DELETE">
-					Guest has been removed successfully.
-				</p>
-			</div>
-		</div>
-	</div>
-	<div class="col-lg-4 col-md-4 col-sm-4">
-		<div class="panel">
-			<div class="panel-encase">
 				<h3>{{event.eventId ? event.eventDate : 'NO ACTIVE EVENT'}}</h3>
 				<!-- <h4>{{event.eventDate}}</h4> -->
 				<div class="btn-group btn-group-justified">
@@ -170,7 +58,7 @@
 							<div class="btn-group">
 								<button class="btn btn-success" type="button"
 								ng-click="saveEvent()"
-								ng-disabled="eventDaysDiff<0 || event.eventId">
+								ng-disabled="eventDaysDiff<0 || event.eventStatus == flags.EventStatus.INACTIVE">
 									Save
 								</button>
 							</div>
@@ -184,20 +72,15 @@
 								<button class="btn btn-danger" type="button"
 								ng-click="deleteEvent()"
 								ng-disabled="!event.eventId">
-									Delete 
+									Delete
 								</button>
 							</div>
 						</div> </span>
-					<p class="text-success generalTopMargin" ng-show="eventAction == flags.UserAction.SAVE">
-						Event has been saved successfully.
-					</p>
-					<p class="text-success generalTopMargin" ng-show="eventAction == flags.UserAction.DELETE">
-						Event has been removed successfully.
-					</p>
 				</div>
 			</form>
 		</div>
 	</div>
+	
 	<div class="col-lg-4 col-md-4 col-sm-4">
 		<div class="panel">
 			<div class="panel-encase">
@@ -206,6 +89,119 @@
 				center="center"
 				position="position"
 				location-details="location"></activity-location>
+			</div>
+		</div>
+	</div>
+	
+	<div class="col-lg-4 col-md-4 col-sm-4">
+		<div class="panel">
+			<div class="panel-encase">
+				<h3>MEMBER REPLIES ({{footballMembersCount ? footballMembersCount : 0}})</h3>
+				<div class="btn-group btn-group-justified ">
+					<div class="btn-group">
+						<button class="btn btn-success" type="button"
+						ng-click="attendanceListFlag = flags.AttendanceStatus.GOING">
+							Going
+						</button>
+					</div>
+					<div class="btn-group">
+						<button class="btn btn-warning" type="button"
+						ng-click="attendanceListFlag = flags.AttendanceStatus.MAYBE">
+							Maybe
+						</button>
+					</div>
+					<div class="btn-group">
+						<button class="btn btn-danger" type="button"
+						ng-click="attendanceListFlag = flags.AttendanceStatus.NOT_GOING">
+							Not Going
+						</button>
+					</div>
+				</div>
+				<ul class="football-members-list">
+					<li class="fraier generalTopMargin"
+					ng-repeat="footballMember in footballMembers | orderBy : 'fullName' | filter : {userAttendanceStatus: attendanceListFlag }">
+						<a class="football-member"></a>
+						<div class="football-member-item">
+							<img class="football-member-avatar"
+							src="images/football_small.png"
+							ng-show="!footballMember.avatar && activityType == flags.ActivityType.FOOTBALL">
+							<img class="football-member-avatar"
+							src="images/tennis_small.png"
+							ng-show="!footballMember.avatar && activityType == flags.ActivityType.TENNIS">
+							<img class="football-member-avatar"
+							ng-src="data:image/JPEG;base64,{{footballMember.avatar}}"
+							ng-show="footballMember.avatar">
+							<div id="member">
+								<a>{{footballMember.fullName}}</a>
+								<br>
+								<span class="football-member-role-text">{{footballMember.role}}</span>
+							</div>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div class="panel">
+			<div class="panel-encase">
+				<h3>GUESTS ({{guestCount ? guestCount : 0}})</h3>
+				<div>
+					<label>Name</label>
+					<div class="input-group">
+						<input type="text"
+						class="form-control"
+						ng-model="guest.fullName"
+						ng-disabled="!event.eventId || event.eventStatus == flags.EventStatus.INACTIVE">
+						<div class="input-group-btn">
+							<div class="btn btn-success"
+							title="Add Guest"
+							ng-click="(!event.eventId || event.eventStatus == flags.EventStatus.INACTIVE) || addGuest()"
+							ng-disabled="!event.eventId || event.eventStatus == flags.EventStatus.INACTIVE">
+								<span class="glyphicon  glyphicon glyphicon-plus"></span>
+							</div>
+						</div>
+					</div>
+				</div>
+				<ul class="football-members-list ">
+					<li class="fraier generalTopMargin"
+					ng-repeat="guestMember in guestMembers | orderBy : 'fullName' ">
+						<a class="football-member"></a>
+						<div class="football-member-item"
+						ng-click="selectGuest(guestMember)">
+							<img class="football-member-avatar"
+							src="images/football_small.png">
+							<div id="member">
+								<a>{{guestMember.fullName}}</a>
+								<br>
+								<span class="football-member-role-text">{{guestMember.role}}</span>
+							</div>
+						</div>
+					</li>
+					{{showGuestActions}}
+				</ul>
+				<span id="guestActions" ng-show="showGuestDetails" >
+					<div class="btn-group btn-group-justified generalTopMargin" >
+						<div class="btn-group">
+							<button class="btn btn-success"
+							type="button"
+							ng-click="addGuest()"
+							ng-disabled="!event.eventId || event.eventStatus == flags.EventStatus.INACTIVE">
+								Save
+							</button>
+						</div>
+						<div class="btn-group">
+							<button class="btn btn-warning" type="button"
+							ng-click="cancelEditGuest()">
+								Cancel
+							</button>
+						</div>
+						<div class="btn-group">
+							<button class="btn btn-danger" type="button"
+							ng-click="deleteGuest()"
+							ng-disabled="!event.eventId || event.eventStatus == flags.EventStatus.INACTIVE">
+								Delete
+							</button>
+						</div>
+					</div> </span>
 			</div>
 		</div>
 	</div>

@@ -4,7 +4,7 @@
  * @ngdoc service
  * @name activeApp.fileValidator
  * @description
- * # dateFormats
+ * # fileValidator
  * Constant in the activeApp.
  */
 angular.module('activeApp').service('FileValidatorService', function() {

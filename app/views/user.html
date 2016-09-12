@@ -86,14 +86,12 @@
 					autocomplete="off"
 					maxlength="32">
 				</div>
-				<p class="text-success" ng-show="userAction == flags.UserAction.EDIT_USER">
-					Changes have been saved successfully.
-				</p>
-				<div class="form-group">
-					<button type="button" class="btn form-control btn-success" ng-click="saveChanges()">
-						Save Changes
-					</button>
-				</div>
+				<!-- <p class="text-success" ng-show="userAction == flags.UserAction.EDIT_USER">
+				Changes have been saved successfully.
+				</p> -->
+				<button type="button" class="btn form-control btn-success" ng-click="saveChanges()">
+					Save Changes
+				</button>
 			</div>
 		</div>
 	</form>
@@ -140,6 +138,11 @@
 	<div class="panel">
 		<div class="panel-encase">
 			<h3>CUSTOM THEME</h3>
+			<div class="form-group generalTopMargin">
+				<button class="btn btn-info" type="button" colorpicker colorpicker-with-input="true">
+					Open Colorpicker
+				</button>
+			</div>
 			<div class="form-group">
 				<label>Menu Background:</label>
 				<input type="text"
@@ -185,16 +188,9 @@
 				autocomplete="off"
 				maxlength="64">
 			</div>
-			<div class="form-group generalTopMargin">
-				<color-picker ng-model="color"></color-picker>
-				<input type="text"
-				class="form-control"
-				ng-model="color"
-				ng-init="color = '#f05a28'">
-			</div>
-			<p class="text-success" ng-show="userAction == flags.UserAction.EDIT_USER">
-				Changes have been saved successfully.
-			</p>
+			<!-- <p class="text-success" ng-show="userAction == flags.UserAction.EDIT_USER">
+			Changes have been saved successfully.
+			</p> -->
 			<div class="btn-group btn-group-justified ">
 				<div class="btn-group">
 					<button type="button" class="btn form-control btn-success" ng-click="saveChanges(true)">

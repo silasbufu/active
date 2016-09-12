@@ -59,7 +59,7 @@ p {
 	margin-bottom: 0px;
 }
 
-/*html *
-{
-   color: red !important;
-}*/
+/*BUTTON*/
+.maxWidthBtn{
+	width: 100% !important;
+}

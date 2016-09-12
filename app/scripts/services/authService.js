@@ -48,7 +48,6 @@ angular.module('activeApp').service('AuthService', function($rootScope, $cookies
 		this.setUser(value);
 		$rootScope.currentUser = angular.copy(this.isLoggedIn().currentUser);
 		if($rootScope.currentUser.customTheme){
-			console.log($rootScope.currentUser)
 			ThemeService.updateTheme($rootScope.currentUser);
 		}
 	};

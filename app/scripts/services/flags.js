@@ -13,12 +13,6 @@ angular.module('activeApp').constant('flags', function() {
 			YES : 1,
 			NO : 0
 		},
-		UserAction : {
-			SAVE : 1,
-			EDIT_USER : 2,
-			EDIT_THEME : 3,
-			DELETE : 4
-		},
 		ActivityType : {
 			FOOTBALL : 1,
 			TENNIS : 2
@@ -31,6 +25,16 @@ angular.module('activeApp').constant('flags', function() {
 		EventStatus : {
 			INACTIVE : 0,
 			ACTIVE : 1
+		},
+		UserAction : {
+			SAVE : {
+				type : 'text-success',
+				message : 'Changes have been saved successfully' 
+			},
+			DELETE : {
+				type : 'text-danger',
+				message : 'Record has been deleted successfully'
+			}
 		}
 	};
 }());

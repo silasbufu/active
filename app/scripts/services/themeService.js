@@ -9,14 +9,6 @@
  */
 angular.module('activeApp').service('ThemeService', function() {
 
-	var defaultTheme = {
-		menuBackground : '#3B5998',
-		menuText : 'white',
-		bodyBackground : '#f8f8f8',
-		panelBackground : 'white',
-		bodyText : 'auto',
-	};
-
 	var sheet;
 
 	function getCustomThemeStylesheet() {
@@ -33,6 +25,7 @@ angular.module('activeApp').service('ThemeService', function() {
 		user.menuText ? sheet.insertRule('.navbar a { color:' + user.menuText + ' !important}', 0) : null;
 		user.bodyBackground ? sheet.insertRule('body { background-color:' + user.bodyBackground + ' !important}', 0) : null;
 		user.bodyText ? sheet.insertRule('body { color:' + user.bodyText + ' !important}', 0) : null;
+		user.bodyText ? sheet.insertRule('.panel a { color:' + user.bodyText + ' !important}', 0) : null;
 		user.panelBackground ? sheet.insertRule('.panel { background-color:' + user.panelBackground + ' !important}', 0) : null;
 	};
 

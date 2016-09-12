@@ -3,27 +3,31 @@
 		<div class="generalBottomMargin">
 			<div class="input-group">
 				<select type="text"
-				class="form-control">
-					<option>Offside Arena</option>
-				</select>
+				class="form-control"
+				ng-options="location.name for location in locationList | orderBy : 'name' "
+				ng-model="locationDetails"
+				ng-change="selectLocation()"></select>
 				<div class="input-group-btn">
 					<div class="btn btn-success"
 					title="Add Location"
 					ng-click="addLocation()">
 						<span class="glyphicon  glyphicon glyphicon-plus"></span>
 					</div>
+					<div class="btn btn-info"
+					title="Edit Location"
+					ng-click="hideLocationDetails || addLocation(true)"
+					ng-disabled="hideLocationDetails">
+						<span class="glyphicon  glyphicon glyphicon-pencil"></span>
+					</div>
 				</div>
 			</div>
 		</div>
 		<div class="generalBottomMargin">
 			<ng-map center="{{center}}" on-click="addMarker()">
-				<marker position="{{position}}"
-				icon="{
-					url : 'images/google_marker_green.png'
-				}"></marker>
+				<marker position="{{position}}"></marker>
 			</ng-map>
 		</div>
-		<span ng-show="showLocationDetails">
+		<span ng-show="locationDetails && !hideLocationDetails">
 			<p>
 				Name : {{locationDetails.name}}
 			</p>
@@ -33,10 +37,17 @@
 			<p>
 				Phone : {{locationDetails.phone}}
 			</p>
-			<p class="noBottomMargin">
+			<p>
 				E-mail : {{locationDetails.email}}
-			</p> </span>
-		<span ng-show="!showLocationDetails">
+			</p>
+			<div class="form-group generalTopMargin noBottomMargin" >
+				<button class="btn btn-info maxWidthBtn" type="button"
+				ng-click="setAsDefault()"
+				ng-disabled="locationDetails.defaultLocation">
+					Set as Default Location
+				</button>
+			</div> </span>
+		<span ng-show="hideLocationDetails">
 			<div class="form-group">
 				<label>Name:<span class="text-danger">*</span></label>
 				<input type="text"
@@ -78,11 +89,11 @@
 				autocomplete="off"
 				maxlength="32">
 			</div>
-			<div class="btn-group btn-group-justified generalTopMargin">
+			<div class="btn-group btn-group-justified generalTopMargin" >
 				<div class="btn-group">
 					<button class="btn btn-success" type="button"
 					ng-click="saveLocation()">
-						Save 
+						Save
 					</button>
 				</div>
 				<div class="btn-group">
@@ -93,7 +104,8 @@
 				</div>
 				<div class="btn-group">
 					<button class="btn btn-danger" type="button"
-					ng-click="deleteLocation()">
+					ng-click="deleteLocation()"
+					ng-disabled="!locationSaveObj.locationId">
 						Delete
 					</button>
 				</div>

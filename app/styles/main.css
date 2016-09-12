@@ -188,6 +188,10 @@ spincube {from,to {
 	font-size: 100px;
 }
 
+.cubespinner div img{
+	width: 100%;
+}
+
 .cubespinner .face1 {
 	-webkit-transform: translateZ(150px);
 	-moz-transform: translateZ(150px);
@@ -227,4 +231,8 @@ spincube {from,to {
 
 .stage-opacity {
 	opacity : 0;
+}
+
+.activityStaticImage img{
+	border-radius : 130px;
 }

@@ -50,6 +50,8 @@ angular.module('activeApp').controller('UserCtrl', function($rootScope, $scope, 
 			};
 			if (customTheme) {
 				$scope.user.customTheme = flags.NumericBooleanFlag.YES;
+			}else{
+				resetThemeObj();
 			}
 			UserResource.save($scope.user, function() {
 				if(!customTheme){
@@ -67,12 +69,16 @@ angular.module('activeApp').controller('UserCtrl', function($rootScope, $scope, 
 	};
 
 	$scope.resetTheme = function() {
+		resetThemeObj();
+		$scope.saveChanges();
+	};
+	
+	var resetThemeObj = function(){
 		$scope.user.menuBackground = null;
 		$scope.user.menuText = null;
 		$scope.user.bodyBackground = null;
 		$scope.user.panelBackground = null;
 		$scope.user.bodyText = null;
-		$scope.saveChanges();
 	};
 
 	$scope.checkExistingUsername = function(username) {

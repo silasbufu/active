@@ -5,16 +5,17 @@
     "angular": "^1.4.0",
     "bootstrap": "^3.2.0",
     "angular-animate": "^1.4.0",
-    "angular-momentjs":"0.2.2",
+    "angular-momentjs": "0.2.2",
     "angular-cookies": "^1.4.0",
     "angular-resource": "^1.4.0",
     "angular-route": "^1.4.0",
     "angular-sanitize": "^1.4.0",
     "angular-touch": "^1.4.0",
     "ng-file-upload": "10.0.2",
-    "ngmap" : "1.17.3",
-    "fullcalendar":"2.8.0",
-    "angular-color-picker":"1.0.10"
+    "ngmap": "1.17.3",
+    "fullcalendar": "2.8.0",
+    "angular-bootstrap-colorpicker": "3.0.25",
+    "responsive-bootstrap-toolkit": "2.6.3"
   },
   "devDependencies": {
     "angular-mocks": "^1.4.0"

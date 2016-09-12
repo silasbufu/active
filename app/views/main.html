@@ -1,5 +1,6 @@
-<div class="jumbotron col-lg-12 col-md-12 col-sm-12 text-center "
-ng-class="{1 : 'jumbotron-background-1', 2 : 'jumbotron-background-2'}[selectedActivity]">
+<div class="jumbotron col-lg-12 text-center "
+ng-class="{1 : 'jumbotron-background-1', 2 : 'jumbotron-background-2'}[selectedActivity]"
+ng-if="!smallScreen && !xsMenu">
 
 	<div class="row">
 		<div class="stage pull-left" style="width: 300px; height: 300px;"
@@ -7,36 +8,30 @@ ng-class="{1 : 'jumbotron-background-1', 2 : 'jumbotron-background-2'}[selectedA
 		ng-mouseenter="selectedActivity=flags.ActivityType.FOOTBALL"
 		ng-mouseleave="selectedActivity=null"
 		ng-click="selectActivity(selectedActivity)">
-			<div class="cubespinner ">
+			<div class="cubespinner">
 				<div class="face1">
 					<img src="images/bale.png"
-					class=" img-responsive pull-left"
-					alt="Responsive image"/>
+					class=" img-responsive pull-left"/>
 				</div>
 				<div class="face2">
 					<img src="images/robben.png"
-					class=" img-responsive pull-left"
-					alt="Responsive image"/>
+					class=" img-responsive pull-left"/>
 				</div>
 				<div class="face3">
 					<img src="images/zlatan.png"
-					class=" img-responsive pull-left"
-					alt="Responsive image"/>
+					class=" img-responsive pull-left"/>
 				</div>
 				<div class="face4">
 					<img src="images/ronaldo.png"
-					class=" img-responsive pull-left"
-					alt="Responsive image"/>
+					class=" img-responsive pull-left"/>
 				</div>
 				<div class="face5">
 					<img src="images/neymar.png"
-					class=" img-responsive pull-left"
-					alt="Responsive image"/>
+					class=" img-responsive pull-left"/>
 				</div>
 				<div class="face6">
 					<img src="images/pogba.png"
-					class=" img-responsive pull-left"
-					alt="Responsive image"/>
+					class=" img-responsive pull-left"/>
 				</div>
 			</div>
 		</div>
@@ -49,38 +44,66 @@ ng-class="{1 : 'jumbotron-background-1', 2 : 'jumbotron-background-2'}[selectedA
 			<div class="cubespinner ">
 				<div class="face1">
 					<img src="images/federer.png"
-					class=" img-responsive"
-					alt="Responsive image"/>
+					class=" img-responsive"/>
 				</div>
 				<div class="face2">
 					<img src="images/serena.png"
-					class=" img-responsive "
-					alt="Responsive image"/>
+					class=" img-responsive "/>
 				</div>
 				<div class="face3">
 					<img src="images/nadal.png"
-					class=" img-responsive "
-					alt="Responsive image"/>
+					class=" img-responsive "/>
 				</div>
 				<div class="face4">
 					<img src="images/djokolife.png"
-					class=" img-responsive "
-					alt="Responsive image"/>
+					class=" img-responsive "/>
 				</div>
 				<div class="face5">
 					<img src="images/halep.png"
-					class=" img-responsive "
-					alt="Responsive image"/>
+					class=" img-responsive "/>
 				</div>
 				<div class="face6">
 					<img src="images/murray.png"
-					class=" img-responsive "
-					alt="Responsive image"/>
+					class=" img-responsive "/>
 				</div>
 			</div>
 		</div>
 
-		<h3 ng-show="!selectedActivity">CHOOSE ACTIVITY</h3>
+		<!-- <h3 ng-show="!selectedActivity">CHOOSE ACTIVITY</h3> -->
+		<h2 class="pull-left" ng-show="selectedActivity==flags.ActivityType.TENNIS">TENNIS</h2>
+		<h2 class="pull-right" ng-show="selectedActivity==flags.ActivityType.FOOTBALL">FOOTBALL</h2>
+	</div>
+
+</div>
+
+<div class="jumbotron col-md-12 col-sm-12 col-xs-12 text-center "
+ng-class="{1 : 'jumbotron-background-1', 2 : 'jumbotron-background-2'}[selectedActivity]"
+ng-if="smallScreen || xsMenu">
+
+	<div class="row">
+		<div class="stage pull-left"
+		ng-class="{'stage-opacity' : selectedActivity == flags.ActivityType.TENNIS}">
+			<div class="activityStaticImage">
+				<img src="images/bale_small.png"
+				class=" img-responsive pull-left"
+				ng-mouseenter="selectedActivity=flags.ActivityType.FOOTBALL"
+				ng-mouseleave="selectedActivity=null"
+				ng-click="selectActivity(selectedActivity)"/>
+			</div>
+		</div>
+
+		<div class="stage pull-right"
+		ng-class="{'stage-opacity' : selectedActivity == flags.ActivityType.FOOTBALL}">
+			<div class="activityStaticImage">
+				<img src="images/federer_small.png"
+				ng-mouseenter="selectedActivity=flags.ActivityType.TENNIS"
+				ng-mouseleave="selectedActivity=null"
+				ng-click="selectActivity(selectedActivity)"
+				class=" img-responsive"/>
+			</div>
+		</div>
+
+		<!-- <h3 ng-show="!selectedActivity">CHOOSE ACTIVITY</h3> -->
 		<h2 class="pull-left" ng-show="selectedActivity==flags.ActivityType.TENNIS">TENNIS</h2>
 		<h2 class="pull-right" ng-show="selectedActivity==flags.ActivityType.FOOTBALL">FOOTBALL</h2>
 	</div>

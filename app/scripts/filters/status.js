@@ -11,10 +11,6 @@
 angular.module('activeApp').filter('staticOptions', function(flags) {
 
 	var labels = {
-		ActivityTypeLink : {
-			1 : '/football',
-			2 : '/tennis'
-		},
 		ActivityType : {
 			1 : 'Football',
 			2 : 'Tennis'
